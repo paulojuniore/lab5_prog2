@@ -34,4 +34,12 @@ public class Facade {
 		return aux;
 	}
 	
+	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) {
+		Aposta aposta = new Aposta(apostador, valor, previsao);
+		Cenario aux = buscaCenario(cenario);
+		if(aux != null) {
+			system.getApostas().add(aposta);
+		}
+	}
+	
 }
