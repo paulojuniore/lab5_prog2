@@ -17,7 +17,7 @@ public class Aposta {
 	/**
 	 * Valor da aposta.
 	 */
-	private double valorAposta;
+	private int valorAposta;
 	
 	/**
 	 * Previsão de apostador ganhar ou não a aposta.
@@ -31,10 +31,19 @@ public class Aposta {
 	 * @param valorAposta : valor da aposta.
 	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
 	 */
-	public Aposta(String nome, double valorAposta, String previsao) {
+	public Aposta(String nome, int valorAposta, String previsao) {
 		this.nome = nome;
 		this.valorAposta = valorAposta;
 		this.previsao = previsao;
+	}
+	
+	/**
+	 * Retorna o valor da aposta.
+	 * 
+	 * @return : retorna o valor da aposta.
+	 */
+	public int getValor() {
+		return valorAposta;
 	}
 	
 	/**

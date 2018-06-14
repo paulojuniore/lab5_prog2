@@ -1,6 +1,8 @@
 package lab5.paulojunior;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.SortedMap;
 
 /**
  * Representa um sistema de apostas. Todo Sistema possui um caixa, taxa e um conjunto de cenários.
@@ -9,6 +11,9 @@ import java.util.ArrayList;
  *
  */
 public class Sistema {
+	
+	
+	private int idBase;
 	
 	/**
 	 * Caixa que representa a quantidade de dinheiro do sistema.
@@ -23,7 +28,7 @@ public class Sistema {
 	/**
 	 * Conjunto de cenários que armazena todos os cenários do sistema.
 	 */
-	private ArrayList<Cenario> cenarios;
+	private SortedMap<Integer, Cenario> cenarios;
 	
 	/**
 	 * Constrói um sistema a partir da quantidade inicial de dinheiro no sistema e sua taxa de juros.
@@ -32,19 +37,20 @@ public class Sistema {
 	 * @param taxa : taxa de juros do sistema.
 	 */
 	public Sistema(int caixa, double taxa) {
+		this.idBase = 1;
 		this.caixa = caixa;
 		this.taxa = taxa;
 	}
 	
-	/**
-	 * Inicializa um sistema a partir do dinheiro em caixa e a taxa de juros.
-	 * 
-	 * @param caixa : dinheiro do sistema.
-	 * @param taxa : taxa de juros do sistema.
-	 */
-	public void inicializa(int caixa, double taxa) {
-		Sistema system = new Sistema(caixa, taxa);
-	}
+//	/**
+//	 * Inicializa um sistema a partir do dinheiro em caixa e a taxa de juros.
+//	 * 
+//	 * @param caixa : dinheiro do sistema.
+//	 * @param taxa : taxa de juros do sistema.
+//	 */
+//	public void inicializa(int caixa, double taxa) {
+//		system = new Sistema(caixa, taxa);
+//	}
 	
 	/**
 	 * Cadastra um novo cenário a partir da sua descrição.
@@ -54,8 +60,8 @@ public class Sistema {
 	 * @return : retorna uma String representando a probabilidade de acerto.
 	 */
 	public int cadastrarCenario(String descricao) {
-		Cenario cenario = new Cenario(descricao);
-		cenarios.add(cenario);
+		Cenario cenario = new Cenario(this.idBase++, descricao);
+		cenarios.put(cenario.getId(), cenario);
 		return cenario.getId();
 	}
 	
@@ -73,20 +79,20 @@ public class Sistema {
 		return "Cenário não cadastrado!" + System.lineSeparator();
 	}
 	
-	/**
-	 * Método auxiliar dos métodos (exibirCenario) e (cadastrarAposta) que busca um cenário no conjunto de cenários a partir do seu número de identificação.
-	 * 
-	 * @param id : número de identificação de um cenário.
-	 * 
-	 * @return : retorna um objeto do tipo Cenario.
-	 */
-	private Cenario buscaCenario(int id) {
-		for (Cenario cenario : cenarios) {
-			if(cenario.getId() == id)
-				return cenario;
-		}
-		return null;
-	}
+//	/**
+//	 * Método auxiliar dos métodos (exibirCenario) e (cadastrarAposta) que busca um cenário no conjunto de cenários a partir do seu número de identificação.
+//	 * 
+//	 * @param id : número de identificação de um cenário.
+//	 * 
+//	 * @return : retorna um objeto do tipo Cenario.
+//	 */
+//	private Cenario buscaCenario(int id) {
+//		for (Cenario cenario : cenarios) {
+//			if(cenario.getId() == id)
+//				return cenario;
+//		}
+//		return null;
+//	}
 	
 	/**
 	 * Exibe todos os cenários cadastrados no sistema.
@@ -95,8 +101,9 @@ public class Sistema {
 	 */
 	public String exibirCenarios() {
 		String aux = "";
-		for(Cenario cenario : cenarios) {
-			aux += cenario.toString();
+		Iterator<Integer> it = this.cenarios.keySet().iterator();
+		while(it.hasNext()) {
+			aux += this.cenarios.get(it.next()).toString();
 		}
 		return aux;
 	}
@@ -110,10 +117,9 @@ public class Sistema {
 	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
 	 */
 	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) {
-		Aposta aposta = new Aposta(apostador, valor, previsao);
-		Cenario aux = buscaCenario(cenario);
+		Cenario aux = this.cenarios.get(cenario);
 		if(aux != null) {
-			aux.getApostas().add(aposta);
+			aux.cadastrarAposta(apostador, valor, previsao);
 		}
 	}
 	
