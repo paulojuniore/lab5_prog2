@@ -1,45 +1,71 @@
 package lab5.paulojunior;
 
+/**
+ * Classe Fachada para o sistema de apostas.
+ * 
+ * @author Paulo Mendes da Silva Júnior - 117210922
+ *
+ */
 public class Facade {
+	
+	/**
+	 * Representa um sistema de apostas.
+	 */
+	private Sistema system;
 		
+	/**
+	 * Inicializa um sistema a partir do dinheiro inicial no caixa e a taxa de juros do sistema.
+	 * 
+	 * @param caixa : dinheiro disponível no caixa.
+	 * @param taxa : taxa de juros do sistema.
+	 */
 	public void inicializa(int caixa, double taxa) {
-		Sistema system = new Sistema(caixa, taxa);
+		system = new Sistema(caixa, taxa);
 	}
 	
+	/**
+	 * Cadastra um novo cenário a partir de sua descrição.
+	 * 
+	 * @param descricao : descrição do cenário.
+	 * 
+	 * @return : retorna um inteiro representando o número de identificação do sistema.
+	 */
 	public int cadastrarCenario(String descricao) {
-		Cenario cenario = new Cenario(descricao);
-		return cenario.getId();
+		return system.cadastrarCenario(descricao);
 	}
 	
+	/**
+	 * Exibe um cenário já existente a partir do seu número de identificação.
+	 * 
+	 * @param idCenario : número de identificação do cenário.
+	 *  
+	 * @return : retorna a representação String do cenário escolhido.
+	 */
 	public String exibirCenario(int idCenario) {
-		Cenario aux = buscaCenario(idCenario); 
-		if(aux != null)
-			return aux.toString();
-		return "Cenário não cadastrado!" + System.lineSeparator();
+		return system.exibirCenario(idCenario);
 	}
 	
-	private Cenario buscaCenario(int id) {
-		for (Cenario cenario : system.getCenarios()) {
-			if(cenario.getId() == id)
-				return cenario;
-		}
-		return null;
-	}
-	
+	/**
+	 * Exibe todos os cenários cadastrados no sistema.
+	 * 
+	 * @return : retorna uma String que representa todos os cenários que foram cadastrados no sistema.
+	 */
 	public String exibirCenarios() {
-		String aux = "";
-		for(Cenario cenario : system.getCenarios()) {
-			aux += cenario.toString();
-		}
-		return aux;
+		return system.exibirCenarios();
 	}
 	
+	/**
+	 * Cadastra uma nova aposta em um cenário.
+	 * 
+	 * @param cenario : número de identificação de um cenário.
+	 * @param apostador : nome do apostador. 
+	 * @param valor : valor da aposta.
+	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
+	 */
 	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) {
-		Aposta aposta = new Aposta(apostador, valor, previsao);
-		Cenario aux = buscaCenario(cenario);
-		if(aux != null) {
-			system.getApostas().add(aposta);
-		}
+		system.cadastrarAposta(cenario, apostador, valor, previsao);
 	}
+	
+	
 	
 }
