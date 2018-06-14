@@ -66,6 +66,4 @@ public class Facade {
 		system.cadastrarAposta(cenario, apostador, valor, previsao);
 	}
 	
-	
-	
 }

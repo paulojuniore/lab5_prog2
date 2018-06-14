@@ -1,6 +1,5 @@
 package lab5.paulojunior;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.SortedMap;
 
@@ -12,7 +11,9 @@ import java.util.SortedMap;
  */
 public class Sistema {
 	
-	
+	/**
+	 * Representa o identificador de um sistema.
+	 */
 	private int idBase;
 	
 	/**
@@ -41,17 +42,7 @@ public class Sistema {
 		this.caixa = caixa;
 		this.taxa = taxa;
 	}
-	
-//	/**
-//	 * Inicializa um sistema a partir do dinheiro em caixa e a taxa de juros.
-//	 * 
-//	 * @param caixa : dinheiro do sistema.
-//	 * @param taxa : taxa de juros do sistema.
-//	 */
-//	public void inicializa(int caixa, double taxa) {
-//		system = new Sistema(caixa, taxa);
-//	}
-	
+		
 	/**
 	 * Cadastra um novo cenário a partir da sua descrição.
 	 * 
@@ -73,27 +64,11 @@ public class Sistema {
 	 * @return : retorna a representação String de um cenário.
 	 */
 	public String exibirCenario(int idCenario) {
-		Cenario aux = buscaCenario(idCenario); 
-		if(aux != null)
-			return aux.toString();
+		if(cenarios.containsKey(idCenario))
+			return cenarios.get(idCenario).toString();
 		return "Cenário não cadastrado!" + System.lineSeparator();
 	}
-	
-//	/**
-//	 * Método auxiliar dos métodos (exibirCenario) e (cadastrarAposta) que busca um cenário no conjunto de cenários a partir do seu número de identificação.
-//	 * 
-//	 * @param id : número de identificação de um cenário.
-//	 * 
-//	 * @return : retorna um objeto do tipo Cenario.
-//	 */
-//	private Cenario buscaCenario(int id) {
-//		for (Cenario cenario : cenarios) {
-//			if(cenario.getId() == id)
-//				return cenario;
-//		}
-//		return null;
-//	}
-	
+		
 	/**
 	 * Exibe todos os cenários cadastrados no sistema.
 	 * 
@@ -124,21 +99,40 @@ public class Sistema {
 	}
 	
 	/**
-	 * Retorna os cenários cadastrados no sistema.
-	 * 
-	 * @return : retorna todos os cenarios cadastrados no sistema.
-	 */
-	public ArrayList<Cenario> getCenarios(){
-		return cenarios;
-	}
-	
-	/**
 	 * Retorna a quantidade de dinheiro contida no caixa.
 	 * 
 	 * @return : retorna a a quantidade de dinheiro contida no caixa.
 	 */
 	public int getCaixa() {
 		return caixa;
+	}
+	
+	/**
+	 * Encerra um cenário e atribui o dinheiro dos apostadores que perderam ao caixa.
+	 * 
+	 * @param cenario : identificador do cenário que será encerrado.
+	 * @param ocorreu : boolean que representa se ocorreu ou não (true/false).
+	 */
+	public void fecharCenario(int cenario, boolean ocorreu) {
+		if(cenarios.containsKey(cenario)) {
+			int rateio = 0;
+			Cenario aux = cenarios.get(cenario);
+			Iterator<Aposta> it = aux.getApostas().iterator();
+			if(ocorreu) {
+				while(it.hasNext()) {
+					if(it.next().getPrevisao().equals("NÃO OCORREU")) {
+						rateio += it.next().getValor();
+					}
+				}
+			}
+			else {
+				while(it.hasNext()) {
+					if(it.next().getPrevisao().equals("OCORREU")) {
+						rateio += it.next().getValor();
+					}
+				}
+			}
+		}
 	}
 	
 }

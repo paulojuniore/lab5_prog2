@@ -47,6 +47,15 @@ public class Aposta {
 	}
 	
 	/**
+	 * Retorna a previsão de acontecer ou não uma aposta.
+	 * 
+	 * @return : retorna a previsão de acontecimento de uma aposta.
+	 */
+	public String getPrevisao() {
+		return previsao;
+	}
+	
+	/**
 	 * Representação String de uma aposta.
 	 */
 	public String toString() {
