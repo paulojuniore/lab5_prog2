@@ -32,6 +32,13 @@ public class Aposta {
 	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
 	 */
 	public Aposta(String nome, int valorAposta, String previsao) {
+		if(nome == null || nome.trim().isEmpty())
+			throw new IllegalArgumentException("Nome inválido!\n");
+		else if(valorAposta <= 0)
+			throw new NumberFormatException("Valor de aposta inválido!\n");
+		else if(previsao == null || previsao.trim().isEmpty())
+			throw new IllegalArgumentException("Previsão de aposta inválida!\n");
+		
 		this.nome = nome;
 		this.valorAposta = valorAposta;
 		this.previsao = previsao;

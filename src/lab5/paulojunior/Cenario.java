@@ -21,7 +21,7 @@ public class Cenario {
 	private String descricao;
 	
 	/**
-	 * Status de um cenário.
+	 * Status de um cenário. O status inicia como true, significando que o cenário está funcionando.
 	 */
 	private boolean status;
 	
@@ -45,7 +45,7 @@ public class Cenario {
 	public Cenario(int id, String descricao) {
 		this.id = id;
 		this.descricao = descricao;
-		this.status = false;
+		this.status = true;
 	}
 	
 	/**
@@ -68,6 +68,24 @@ public class Cenario {
 	 */
 	public int getId() {
 		return id;
+	}
+	
+	/**
+	 * Retorna o status de um cenário.
+	 * 
+	 * @return : retorna o status de um cenário.
+	 */
+	public boolean getStatus() {
+		return status;
+	}
+	
+	/**
+	 * Altera o status de um cenário.
+	 * 
+	 * @param status : status do cenário.
+	 */
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	
 	/**

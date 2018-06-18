@@ -11,7 +11,7 @@ public class Facade {
 	/**
 	 * Representa um sistema de apostas.
 	 */
-	private Sistema system;
+	private CenarioController system;
 		
 	/**
 	 * Inicializa um sistema a partir do dinheiro inicial no caixa e a taxa de juros do sistema.
@@ -20,7 +20,7 @@ public class Facade {
 	 * @param taxa : taxa de juros do sistema.
 	 */
 	public void inicializa(int caixa, double taxa) {
-		system = new Sistema(caixa, taxa);
+		system = new CenarioController(caixa, taxa);
 	}
 	
 	/**

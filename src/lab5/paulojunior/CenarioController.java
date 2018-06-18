@@ -9,7 +9,7 @@ import java.util.SortedMap;
  * @author Paulo Mendes da Silva Júnior - 117210922
  *
  */
-public class Sistema {
+public class CenarioController {
 	
 	/**
 	 * Representa o identificador de um sistema.
@@ -27,6 +27,11 @@ public class Sistema {
 	private double taxa;
 	
 	/**
+	 * Representa o valor que é multiplicado pela taxa para ser adicionado ao caixa.
+	 */
+	private int rateio;
+	
+	/**
 	 * Conjunto de cenários que armazena todos os cenários do sistema.
 	 */
 	private SortedMap<Integer, Cenario> cenarios;
@@ -37,7 +42,7 @@ public class Sistema {
 	 * @param caixa : dinheiro do sistema.
 	 * @param taxa : taxa de juros do sistema.
 	 */
-	public Sistema(int caixa, double taxa) {
+	public CenarioController(int caixa, double taxa) {
 		this.idBase = 1;
 		this.caixa = caixa;
 		this.taxa = taxa;
@@ -132,7 +137,14 @@ public class Sistema {
 					}
 				}
 			}
+			this.caixa += rateio * this.taxa;
 		}
 	}
+	
+//	public int getCaixaCenario(int cenario) {
+//		if(cenarios.containsKey(cenario)) {
+//			return cenarios.get(cenario)
+//		}
+//	}
 	
 }
