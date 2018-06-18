@@ -1,7 +1,6 @@
 package lab5.paulojunior;
 
-import java.util.Iterator;
-import java.util.SortedMap;
+import java.util.HashMap;
 
 /**
  * Representa um sistema de apostas. Todo Sistema possui um caixa, taxa e um conjunto de cenários.
@@ -10,11 +9,6 @@ import java.util.SortedMap;
  *
  */
 public class CenarioController {
-	
-	/**
-	 * Representa o identificador de um sistema.
-	 */
-	private int idBase;
 	
 	/**
 	 * Caixa que representa a quantidade de dinheiro do sistema.
@@ -27,14 +21,15 @@ public class CenarioController {
 	private double taxa;
 	
 	/**
-	 * Representa o valor que é multiplicado pela taxa para ser adicionado ao caixa.
-	 */
-	private int rateio;
-	
-	/**
 	 * Conjunto de cenários que armazena todos os cenários do sistema.
 	 */
-	private SortedMap<Integer, Cenario> cenarios;
+	private HashMap<Integer, Cenario> cenarios;
+	
+	/**
+	 * Representa o identificador de um sistema.
+	 */
+	private int idCenario;
+	
 	
 	/**
 	 * Constrói um sistema a partir da quantidade inicial de dinheiro no sistema e sua taxa de juros.
@@ -43,9 +38,15 @@ public class CenarioController {
 	 * @param taxa : taxa de juros do sistema.
 	 */
 	public CenarioController(int caixa, double taxa) {
-		this.idBase = 1;
+		if(caixa < 0) 
+			throw new NumberFormatException("Caixa negativo não permitido.");
+		else if(taxa < 0)
+			throw new NumberFormatException("Taxa inválida!");
+		
+		this.idCenario = 1;
 		this.caixa = caixa;
 		this.taxa = taxa;
+		this.cenarios = new HashMap<>();
 	}
 		
 	/**
@@ -53,12 +54,12 @@ public class CenarioController {
 	 * 
 	 * @param descricao : descrição do cenário de apostas.
 	 * 
-	 * @return : retorna uma String representando a probabilidade de acerto.
+	 * @return : retorna um int representando o identificador do cenário.
 	 */
 	public int cadastrarCenario(String descricao) {
-		Cenario cenario = new Cenario(this.idBase++, descricao);
-		cenarios.put(cenario.getId(), cenario);
-		return cenario.getId();
+		Cenario cenario = new Cenario(descricao);
+		cenarios.put(this.idCenario, cenario);
+		return this.idCenario++;
 	}
 	
 	/**
@@ -73,6 +74,12 @@ public class CenarioController {
 			return cenarios.get(idCenario).toString();
 		return "Cenário não cadastrado!" + System.lineSeparator();
 	}
+	
+	public String exibirApostas(int idCenario) {
+		if(cenarios.containsKey(idCenario))
+			return cenarios.get(idCenario).exibirApostas();
+		return "Cenário não cadastrado!" + System.lineSeparator();
+	}
 		
 	/**
 	 * Exibe todos os cenários cadastrados no sistema.
@@ -81,9 +88,8 @@ public class CenarioController {
 	 */
 	public String exibirCenarios() {
 		String aux = "";
-		Iterator<Integer> it = this.cenarios.keySet().iterator();
-		while(it.hasNext()) {
-			aux += this.cenarios.get(it.next()).toString();
+		for(int chave : cenarios.keySet()) {
+			aux += chave + " - " + cenarios.get(chave).toString();
 		}
 		return aux;
 	}
@@ -99,7 +105,7 @@ public class CenarioController {
 	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) {
 		Cenario aux = this.cenarios.get(cenario);
 		if(aux != null) {
-			aux.cadastrarAposta(apostador, valor, previsao);
+			aux.fazerAposta(apostador, valor, previsao);
 		}
 	}
 	
@@ -113,38 +119,42 @@ public class CenarioController {
 	}
 	
 	/**
+	 * Retorna o total de apostas efetuadas em um cenário, a partir do número do cenário.
+	 * 
+	 * @param cenario : número do cenário a saber a quantidade de apostas.
+	 * 
+	 * @return : retorna o número de apostas efetuadas em um cenário.
+	 */
+	public int totalDeApostas(int cenario) {
+		return cenarios.get(cenario).getTotalDeApostas();
+	}
+	
+	public int valorTotalEmApostas(int cenario) {
+		return cenarios.get(cenario).getValorTotalEmApostas();
+	}
+	
+	/**
 	 * Encerra um cenário e atribui o dinheiro dos apostadores que perderam ao caixa.
 	 * 
 	 * @param cenario : identificador do cenário que será encerrado.
 	 * @param ocorreu : boolean que representa se ocorreu ou não (true/false).
 	 */
-	public void fecharCenario(int cenario, boolean ocorreu) {
-		if(cenarios.containsKey(cenario)) {
-			int rateio = 0;
-			Cenario aux = cenarios.get(cenario);
-			Iterator<Aposta> it = aux.getApostas().iterator();
-			if(ocorreu) {
-				while(it.hasNext()) {
-					if(it.next().getPrevisao().equals("NÃO OCORREU")) {
-						rateio += it.next().getValor();
-					}
-				}
-			}
-			else {
-				while(it.hasNext()) {
-					if(it.next().getPrevisao().equals("OCORREU")) {
-						rateio += it.next().getValor();
-					}
-				}
-			}
-			this.caixa += rateio * this.taxa;
-		}
+	public void fecharAposta(int cenario, boolean ocorreu) {
+		this.cenarios.get(cenario).encerrarCenario(ocorreu);
+		this.caixa += (int) this.cenarios.get(cenario).somaApostasPerdedoras() * taxa;
 	}
 	
-//	public int getCaixaCenario(int cenario) {
-//		if(cenarios.containsKey(cenario)) {
-//			return cenarios.get(cenario)
-//		}
-//	}
+	/**
+	 * Retorna a quantidade de dinheiro que será destinada ao caixa.
+	 * 
+	 * @return : retorna a quantidade de dinheiro que será destinada ao caixa.
+	 */
+	public int getCaixaCenario(int cenario) {
+		return (int) (this.cenarios.get(cenario).somaApostasPerdedoras() * taxa);
+	}
+	
+	public int getTotalRateioCenario(int cenario) {
+		return this.cenarios.get(cenario).somaApostasPerdedoras() - this.getCaixaCenario(cenario);
+	}
 	
 }

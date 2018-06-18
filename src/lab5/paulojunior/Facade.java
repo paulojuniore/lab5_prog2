@@ -66,4 +66,69 @@ public class Facade {
 		system.cadastrarAposta(cenario, apostador, valor, previsao);
 	}
 	
+	/**
+	 * Retorna o número de apostas cadastradas em um cenário.
+	 * 
+	 * @param cenario : número do cenário.
+	 * 
+	 * @return : retorna o número de apostas cadastradas em um cenário.
+	 */
+	public int valorTotalDeApostas(int cenario) {
+		return system.valorTotalEmApostas(cenario);
+	}
+	
+	/**
+	 * Retorna o valor total em apostas de um determinado cenário.
+	 * 
+	 * @param cenario : número do cenário.
+	 * 
+	 * @return : retorna o valor total em apostas de um determinado cenário.
+	 */
+	public int totalDeApostas(int cenario) {
+		return system.totalDeApostas(cenario);
+	}
+	
+	/**
+	 * Retorna uma String com a representação de todas as apostas de um cenário.
+	 * 
+	 * @param cenario : número do cenário.
+	 * 
+	 * @return : retorna a representaçaõ String de todas as apostas de um cenário.
+	 */
+	public String exibeApostas(int cenario) {
+		return system.exibirApostas(cenario);
+	}
+	
+	/**
+	 * Fecha uma aposta de um determinado cenário.
+	 * 
+	 * @param cenario : número do cenário.
+	 * @param ocorreu : boolean que indica se ocorreu ou não a aposta.
+	 */
+	public void fecharAposta(int cenario, boolean ocorreu) {
+		system.fecharAposta(cenario, ocorreu);
+	}
+	
+	/**
+	 * Retorna o valor total de um cenário encerrado que será destinado ao caixa.
+	 * 
+	 * @param cenario : número do cenário.
+	 * 
+	 * @return : retorna o valor total de um cenário encerrado que será destinado ao caixa.
+	 */
+	public int getCaixaCenario(int cenario) {
+		return system.getCaixaCenario(cenario);
+	}
+	
+	/**
+	 * Retorna o valor total de um cenário encerrado que será destinado a distribuição entre as apostas vencedoras.
+	 * 
+	 * @param cenario : número do cenário.
+	 *  
+	 * @return : retorna o valor total de um cenário encerrado que será destinado a distribuição entra as apostas vencedoras.
+	 */
+	public int getTotalRateioCenario(int cenario) {
+		return system.getTotalRateioCenario(cenario);
+	}
+	
 }

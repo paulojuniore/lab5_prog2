@@ -3,17 +3,12 @@ package lab5.paulojunior;
 import java.util.ArrayList;
 
 /**
- * Representa um cenário de apostas. Todo cenário possui um identificador único, descrição, status e um conjunto de apostas.
+ * Representa um cenário de apostas. Todo cenário possui uma descrição, status e um conjunto de apostas.
  * 
  * @author Paulo Mendes da Silva Júnior - 117210922
  *
  */
 public class Cenario {
-	
-	/**
-	 * Identificador único de um cenário.
-	 */
-	private int id;
 	
 	/**
 	 * Descrição de um cenário.
@@ -23,7 +18,12 @@ public class Cenario {
 	/**
 	 * Status de um cenário. O status inicia como true, significando que o cenário está funcionando.
 	 */
-	private boolean status;
+	private String status;
+	
+	/**
+	 * Representa se uma aposta pode acontecer ou não. true/false
+	 */
+	private boolean previsao;
 	
 	/**
 	 * Conjunto de apostas de um cenário.
@@ -42,10 +42,11 @@ public class Cenario {
 	 * @param id : identificador único de um cenário.
 	 * @param descricao : descrição de um cenário.
 	 */
-	public Cenario(int id, String descricao) {
-		this.id = id;
+	public Cenario(String descricao) {
 		this.descricao = descricao;
-		this.status = true;
+		this.status = "Não finalizado";
+		this.previsao = false;
+		this.apostas = new ArrayList<>();
 	}
 	
 	/**
@@ -55,19 +56,43 @@ public class Cenario {
 	 * @param valor : valor da aposta.
 	 * @param previsao : previsão de se o apostador vai ganhar ou não.
 	 */
-	public void cadastrarAposta(String apostador, int valor, String previsao) {
+	public void fazerAposta(String apostador, int valor, String previsao) {
 		Aposta aposta = new Aposta(apostador, valor, previsao);
 		this.apostas.add(aposta);
 		this.valorTotalEmApostas += aposta.getValor();	
 	}
 	
 	/**
-	 * Retorna o identificador de um cenário.
+	 * Encerra um cenário existente.
 	 * 
-	 * @return : retorna o identificador de um cenário.
+	 * @param ocorreu : boolean que representa se a aposta ocorreu ou não.
 	 */
-	public int getId() {
-		return id;
+	public void encerrarCenario(boolean ocorreu) {
+		if(ocorreu) {
+			this.status = "Finalizado (ocorreu)";
+			this.previsao = true;
+		}
+		else {
+			this.status = "Finalizado (n ocorreu)";
+		}
+	}
+	
+	/**
+	 * Retorna a soma das apostas que tiveram resultado contrário ao sorteado.
+	 * 
+	 * @return : retorna a soma da apostas perdedoras.
+	 */
+	public int somaApostasPerdedoras() {
+		int soma = 0;
+		for(Aposta aposta : apostas) {
+			if(aposta.getPrevisao().equals("VAI ACONTECER") && !previsao) {
+				soma += aposta.getValor();
+			}
+			else if(aposta.getPrevisao().equals("NÃO VAI ACONTECER") && previsao) {
+				soma += aposta.getValor();
+			}
+		}
+		return soma;
 	}
 	
 	/**
@@ -75,17 +100,8 @@ public class Cenario {
 	 * 
 	 * @return : retorna o status de um cenário.
 	 */
-	public boolean getStatus() {
+	public String getStatus() {
 		return status;
-	}
-	
-	/**
-	 * Altera o status de um cenário.
-	 * 
-	 * @param status : status do cenário.
-	 */
-	public void setStatus(boolean status) {
-		this.status = status;
 	}
 	
 	/**
@@ -120,12 +136,12 @@ public class Cenario {
 	}
 	
 	/**
-	 * Retorna a lista de apostas de um cenário.
+	 * Verifica se o cenário foi finalizado.
 	 * 
-	 * @return : retorna a lista de apostas de um cenário.
+	 * @return : retorna se o cenário foi finalizado ou não. true/false
 	 */
-	public ArrayList<Aposta> getApostas(){
-		return this.apostas;
+	public boolean isFinalizado() {
+		return status.equals("Finalizado (ocorreu)") || status.equals("Finalizado (n ocorreu)");
 	}
 	
 	/**
@@ -134,7 +150,7 @@ public class Cenario {
 	 * @return : retorna a representação String de um cenário.
 	 */
 	public String toString() {
-		return this.id + " - " + this.descricao + " - " + this.status + System.lineSeparator();
+		return this.descricao + " - " + this.status + System.lineSeparator();
 	}
 
 }
