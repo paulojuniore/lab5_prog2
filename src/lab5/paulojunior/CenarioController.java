@@ -39,14 +39,15 @@ public class CenarioController {
 	 */
 	public CenarioController(int caixa, double taxa) {
 		if(caixa < 0) 
-			throw new NumberFormatException("Caixa negativo não permitido.");
+			throw new NumberFormatException("Erro na inicializacao: Caixa nao pode ser inferior a 0");
 		else if(taxa < 0)
-			throw new NumberFormatException("Taxa inválida!");
+			throw new NumberFormatException("Erro na inicializacao: Taxa nao pode ser inferior a 0");
 		
 		this.idCenario = 1;
 		this.caixa = caixa;
 		this.taxa = taxa;
 		this.cenarios = new HashMap<>();
+		
 	}
 		
 	/**
@@ -57,7 +58,7 @@ public class CenarioController {
 	 * @return : retorna um int representando o identificador do cenário.
 	 */
 	public int cadastrarCenario(String descricao) {
-		Cenario cenario = new Cenario(descricao);
+		Cenario cenario = new Cenario(idCenario, descricao);
 		cenarios.put(this.idCenario, cenario);
 		return this.idCenario++;
 	}

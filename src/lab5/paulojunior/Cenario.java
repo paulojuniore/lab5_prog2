@@ -35,6 +35,8 @@ public class Cenario {
 	 */
 	private int valorTotalEmApostas = 0;
 	
+	private int id;
+	
 	
 	/**
 	 * Constrói um cenário a partir do seu identificador e descrição.
@@ -42,11 +44,12 @@ public class Cenario {
 	 * @param id : identificador único de um cenário.
 	 * @param descricao : descrição de um cenário.
 	 */
-	public Cenario(String descricao) {
+	public Cenario(int id, String descricao) {
 		this.descricao = descricao;
-		this.status = "Não finalizado";
+		this.status = "Nao finalizado";
 		this.previsao = false;
 		this.apostas = new ArrayList<>();
+		this.id = id;
 	}
 	
 	/**
@@ -121,6 +124,10 @@ public class Cenario {
 	public int getTotalDeApostas() {
 		return apostas.size();
 	}
+	
+	public int getId() {
+		return id;
+	}
 		
 	/**
 	 * Exibe todas as apostas de um cenário na ordem em que foram efetuadas.
@@ -150,7 +157,7 @@ public class Cenario {
 	 * @return : retorna a representação String de um cenário.
 	 */
 	public String toString() {
-		return this.descricao + " - " + this.status + System.lineSeparator();
+		return this.id + " - " + this.descricao + " - " + this.status;
 	}
 
 }

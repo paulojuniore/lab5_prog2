@@ -1,5 +1,7 @@
 package lab5.paulojunior;
 
+import easyaccept.EasyAccept;
+
 /**
  * Classe Fachada para o sistema de apostas.
  * 
@@ -129,6 +131,15 @@ public class Facade {
 	 */
 	public int getTotalRateioCenario(int cenario) {
 		return system.getTotalRateioCenario(cenario);
+	}
+	
+	public int getCaixa() {
+		return system.getCaixa();
+	}
+	
+	public static void main(String[] args) {
+		args = new String[] {"lab5.paulojunior.Facade", "acceptance_tests/us1_test.txt", "acceptance_tests/us2_test.txt"};
+		EasyAccept.main(args);
 	}
 	
 }
