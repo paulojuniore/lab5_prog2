@@ -45,8 +45,12 @@ public class Cenario {
 	 * @param descricao : descrição de um cenário.
 	 */
 	public Cenario(int id, String descricao) {
+		if(descricao.trim().isEmpty() || descricao == null) {
+			throw new IllegalArgumentException("Erro no cadastro de cenario: Descricao nao pode ser vazia");
+		}
+		
 		this.descricao = descricao;
-		this.status = "Nao finalizado";
+		this.status = "N finalizado";
 		this.previsao = false;
 		this.apostas = new ArrayList<>();
 		this.id = id;
@@ -91,7 +95,7 @@ public class Cenario {
 			if(aposta.getPrevisao().equals("VAI ACONTECER") && !previsao) {
 				soma += aposta.getValor();
 			}
-			else if(aposta.getPrevisao().equals("NÃO VAI ACONTECER") && previsao) {
+			else if(aposta.getPrevisao().equals("N VAI ACONTECER") && previsao) {
 				soma += aposta.getValor();
 			}
 		}
@@ -157,7 +161,7 @@ public class Cenario {
 	 * @return : retorna a representação String de um cenário.
 	 */
 	public String toString() {
-		return this.id + " - " + this.descricao + " - " + this.status;
+		return this.id + " - " + this.descricao + " - " + this.status + System.lineSeparator();
 	}
 
 }

@@ -57,8 +57,8 @@ public class CenarioControllerTest {
 	 */
 	@Test
 	public void testExibirCenario() {
-		assertEquals("O Brasil não será campeão - Não finalizado" + System.lineSeparator(), sistema.exibirCenario(1));
-		assertEquals("A Argentina irá mais longe que Portugal na copa - Não finalizado" + System.lineSeparator(), sistema.exibirCenario(2));
+		assertEquals("1 - O Brasil não será campeão - N finalizado" + System.lineSeparator(), sistema.exibirCenario(1));
+		assertEquals("2 - A Argentina irá mais longe que Portugal na copa - N finalizado" + System.lineSeparator(), sistema.exibirCenario(2));
 	}
 
 	/**
@@ -66,8 +66,8 @@ public class CenarioControllerTest {
 	 */
 	@Test
 	public void testExibirCenarios() {
-		assertEquals("1 - O Brasil não será campeão - Não finalizado" + System.lineSeparator() +
-					 "2 - A Argentina irá mais longe que Portugal na copa - Não finalizado" + System.lineSeparator(), sistema.exibirCenarios());
+		assertEquals("1 - O Brasil não será campeão - N finalizado" + System.lineSeparator() +
+					 "2 - A Argentina irá mais longe que Portugal na copa - N finalizado" + System.lineSeparator(), sistema.exibirCenarios());
 	}
 
 	/**

@@ -73,7 +73,9 @@ public class CenarioController {
 	public String exibirCenario(int idCenario) {
 		if(cenarios.containsKey(idCenario))
 			return cenarios.get(idCenario).toString();
-		return "Cenário não cadastrado!" + System.lineSeparator();
+		else if(idCenario < 0)
+			return "Erro na consulta de cenario: Cenario invalido";
+		return "Erro na consulta de cenario: Cenario nao cadastrado" + System.lineSeparator();
 	}
 	
 	public String exibirApostas(int idCenario) {
@@ -90,7 +92,7 @@ public class CenarioController {
 	public String exibirCenarios() {
 		String aux = "";
 		for(int chave : cenarios.keySet()) {
-			aux += chave + " - " + cenarios.get(chave).toString();
+			aux += cenarios.get(chave).toString();
 		}
 		return aux;
 	}
