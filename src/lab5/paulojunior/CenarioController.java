@@ -66,7 +66,7 @@ public class CenarioController {
 	/**
 	 * Exibe um cenário a partir do seu número de identificação.
 	 * 
-	 * @param idCenario : inteiro que representa a identificação de um cenário.
+	 * @param cenario : inteiro que representa a identificação de um cenário.
 	 * 
 	 * @return : retorna a representação String de um cenário.
 	 */
