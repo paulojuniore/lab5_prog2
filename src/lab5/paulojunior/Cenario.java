@@ -3,7 +3,8 @@ package lab5.paulojunior;
 import java.util.ArrayList;
 
 /**
- * Representa um cenário de apostas. Todo cenário possui uma descrição, status e um conjunto de apostas.
+ * Representa um cenário de apostas. Todo cenário possui uma descrição, um status (Finalizado/Nao finalizado), 
+ * uma previsão de acontecimento da aposta (true/false), um conjunto de apostas e um identificador único de um cenário.
  * 
  * @author Paulo Mendes da Silva Júnior - 117210922
  *
@@ -35,6 +36,9 @@ public class Cenario {
 	 */
 	private int valorTotalEmApostas = 0;
 	
+	/**
+	 * Identificador único de um cenário de apostas.
+	 */
 	private int id;
 	
 	
@@ -50,7 +54,7 @@ public class Cenario {
 		}
 		
 		this.descricao = descricao;
-		this.status = "N finalizado";
+		this.status = "Nao finalizado";
 		this.previsao = false;
 		this.apostas = new ArrayList<>();
 		this.id = id;
@@ -129,6 +133,11 @@ public class Cenario {
 		return apostas.size();
 	}
 	
+	/**
+	 * Retorna o identificador único de um cenário.
+	 * 
+	 * @return : retorna o identificador único de um cenário.
+	 */
 	public int getId() {
 		return id;
 	}
@@ -161,7 +170,7 @@ public class Cenario {
 	 * @return : retorna a representação String de um cenário.
 	 */
 	public String toString() {
-		return this.id + " - " + this.descricao + " - " + this.status + System.lineSeparator();
+		return this.id + " - " + this.descricao + " - " + this.status;
 	}
 
 }

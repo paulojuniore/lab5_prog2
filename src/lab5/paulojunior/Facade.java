@@ -39,12 +39,12 @@ public class Facade {
 	/**
 	 * Exibe um cenário já existente a partir do seu número de identificação.
 	 * 
-	 * @param idCenario : número de identificação do cenário.
+	 * @param cenario : número de identificação do cenário.
 	 *  
 	 * @return : retorna a representação String do cenário escolhido.
 	 */
-	public String exibirCenario(int idCenario) {
-		return system.exibirCenario(idCenario);
+	public String exibirCenario(int cenario) {
+		return system.exibirCenario(cenario);
 	}
 	
 	/**
@@ -133,12 +133,23 @@ public class Facade {
 		return system.getTotalRateioCenario(cenario);
 	}
 	
+	/**
+	 * Retorna o valor contido no caixa.
+	 * 
+	 * @return : retorna o valor contido no caixa.
+	 */
 	public int getCaixa() {
 		return system.getCaixa();
 	}
 	
+	/**
+	 * Método para testes de aceitação do sistema de apostas.
+	 * 
+	 * @param args : trata-se do caminho da classe Fachada e dos arquivos que contém os testes do sistema.
+	 */
 	public static void main(String[] args) {
-		args = new String[] {"lab5.paulojunior.Facade", "acceptance_tests/us1_test.txt", "acceptance_tests/us2_test.txt"};
+		args = new String[] {"lab5.paulojunior.Facade", "acceptance_tests/us1_test.txt", "acceptance_tests/us2_test.txt", 
+				"acceptance_tests/us3_test.txt", "acceptance_tests/us4_test.txt"};
 		EasyAccept.main(args);
 	}
 	

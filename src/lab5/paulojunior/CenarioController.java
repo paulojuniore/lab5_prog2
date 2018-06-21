@@ -70,14 +70,22 @@ public class CenarioController {
 	 * 
 	 * @return : retorna a representação String de um cenário.
 	 */
-	public String exibirCenario(int idCenario) {
-		if(cenarios.containsKey(idCenario))
-			return cenarios.get(idCenario).toString();
-		else if(idCenario < 0)
-			return "Erro na consulta de cenario: Cenario invalido";
-		return "Erro na consulta de cenario: Cenario nao cadastrado" + System.lineSeparator();
+	public String exibirCenario(int cenario) {
+		if(cenarios.containsKey(cenario))
+			return cenarios.get(cenario).toString();
+		else if(cenario < 0)
+			throw new IllegalArgumentException("Erro na consulta de cenario: Cenario invalido");
+		else
+			throw new IllegalArgumentException("Erro na consulta de cenario: Cenario nao cadastrado");
 	}
 	
+	/**
+	 * Exibe todas as apostas efetuadas em um cenário.
+	 * 
+	 * @param idCenario : identificador do cenário.
+	 * 
+	 * @return : todas as apostas efetuadas em um cenário.
+	 */
 	public String exibirApostas(int idCenario) {
 		if(cenarios.containsKey(idCenario))
 			return cenarios.get(idCenario).exibirApostas();
@@ -92,13 +100,14 @@ public class CenarioController {
 	public String exibirCenarios() {
 		String aux = "";
 		for(int chave : cenarios.keySet()) {
-			aux += cenarios.get(chave).toString();
+			aux += cenarios.get(chave).toString() + System.lineSeparator();
 		}
 		return aux;
 	}
 	
 	/**
-	 * Cadastra uma aposta dentro do sistema em um cenário especificado.
+	 * Cadastra uma aposta dentro do sistema em um cenário especificado. Podem ocorrer mensagens de erro, como por
+	 * exemplo: tentar cadastrar uma aposta em um cenário inexistente.
 	 * 
 	 * @param cenario : número de identificação do cenário.
 	 * @param apostador : nome do apostador.
@@ -106,9 +115,14 @@ public class CenarioController {
 	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
 	 */
 	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) {
-		Cenario aux = this.cenarios.get(cenario);
-		if(aux != null) {
+		if(cenarios.containsKey(cenario)) {
+			Cenario aux = this.cenarios.get(cenario);
 			aux.fazerAposta(apostador, valor, previsao);
+		}
+		else if(cenario <= 0)
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario invalido");
+		else {
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario nao cadastrado");
 		}
 	}
 	
@@ -122,42 +136,110 @@ public class CenarioController {
 	}
 	
 	/**
-	 * Retorna o total de apostas efetuadas em um cenário, a partir do número do cenário.
+	 * Retorna o total de apostas efetuadas em um cenário, a partir do número do cenário. , como por exemplo: 
+	 * tentar acessar o total de apostas de um cenário inexistente.
 	 * 
 	 * @param cenario : número do cenário a saber a quantidade de apostas.
 	 * 
 	 * @return : retorna o número de apostas efetuadas em um cenário.
 	 */
 	public int totalDeApostas(int cenario) {
-		return cenarios.get(cenario).getTotalDeApostas();
-	}
-	
-	public int valorTotalEmApostas(int cenario) {
-		return cenarios.get(cenario).getValorTotalEmApostas();
+		if(cenarios.containsKey(cenario))
+			return cenarios.get(cenario).getTotalDeApostas();
+		else if(cenario <= 0)
+			throw new IllegalArgumentException("Erro na consulta do total de apostas: Cenario invalido");
+		else
+			throw new IllegalArgumentException("Erro na consulta do total de apostas: Cenario nao cadastrado");
 	}
 	
 	/**
-	 * Encerra um cenário e atribui o dinheiro dos apostadores que perderam ao caixa.
+	 * Retorna o valor total arrecadado em apostas pelo sistema. Podem ocorrer mensagens de erro, como por exemplo:
+	 * tentar consultar o valor total em apostas de um cenário inexistente ou não cadastrado.
+	 * 
+	 * @param cenario : identificador do cenário.
+	 * 
+	 * @return : retorna o valor total arrecadado em apostas pelo sistema.
+	 */
+	public int valorTotalEmApostas(int cenario) {
+		if(cenarios.containsKey(cenario)) 
+			return cenarios.get(cenario).getValorTotalEmApostas();
+		else if(cenario <= 0) 
+			throw new IllegalArgumentException("Erro na consulta do valor total de apostas: Cenario invalido");
+		else
+			throw new IllegalArgumentException("Erro na consulta do valor total de apostas: Cenario nao cadastrado");
+	}
+	
+	/**
+	 * Encerra um cenário e atribui o dinheiro dos apostadores que perderam ao caixa. Podem ocorrer mensagens de 
+	 * erro, como por exemplo: tentar encerrar um cenário que já está fechado ou um não cadastrado.
 	 * 
 	 * @param cenario : identificador do cenário que será encerrado.
-	 * @param ocorreu : boolean que representa se ocorreu ou não (true/false).
+	 * @param ocorreu : boolean que representa se ocorreu ou não a aposta. (true/false).
 	 */
 	public void fecharAposta(int cenario, boolean ocorreu) {
-		this.cenarios.get(cenario).encerrarCenario(ocorreu);
-		this.caixa += (int) this.cenarios.get(cenario).somaApostasPerdedoras() * taxa;
+		if(cenarios.containsKey(cenario)) {
+			String aux = cenarios.get(cenario).getStatus();
+			if(aux.equals("Finalizado (ocorreu)") || aux.equals("Finalizado (n ocorreu)")) {
+				throw new IllegalArgumentException("Erro ao fechar aposta: Cenario ja esta fechado");
+			}
+			else {
+				this.cenarios.get(cenario).encerrarCenario(ocorreu);
+				this.caixa += (int) this.cenarios.get(cenario).somaApostasPerdedoras() * taxa;
+			}
+		}
+		else if(cenario <= 0) {
+			throw new IllegalArgumentException("Erro ao fechar aposta: Cenario invalido");
+		}
+		else {
+			throw new IllegalArgumentException("Erro ao fechar aposta: Cenario nao cadastrado");
+		}
 	}
 	
 	/**
-	 * Retorna a quantidade de dinheiro que será destinada ao caixa.
+	 * Retorna a quantidade de dinheiro que será destinada ao caixa. Podem ocorrer mensagens de erro, como por exemplo:
+	 * tentar retornar a quantidade de dinheiro do caixa de um cenário que ainda está aberto ou um cenário inexistente.
 	 * 
 	 * @return : retorna a quantidade de dinheiro que será destinada ao caixa.
 	 */
 	public int getCaixaCenario(int cenario) {
-		return (int) (this.cenarios.get(cenario).somaApostasPerdedoras() * taxa);
+		if(cenarios.containsKey(cenario)) {
+			String aux = cenarios.get(cenario).getStatus();
+			if(aux.equals("Finalizado (ocorreu)") || aux.equals("Finalizado (n ocorreu)")){
+				return (int) (this.cenarios.get(cenario).somaApostasPerdedoras() * taxa);
+			}
+			else
+				throw new IllegalArgumentException("Erro na consulta do caixa do cenario: Cenario ainda esta aberto");
+		}
+		else if(cenario <= 0) {
+			throw new IllegalArgumentException("Erro na consulta do caixa do cenario: Cenario invalido");
+		}
+		else {
+			throw new IllegalArgumentException("Erro na consulta do caixa do cenario: Cenario nao cadastrado");
+		}
 	}
 	
+	/**
+	 * Retorna o rateio total de de um cenário. Que é o valor que será distribuido entre as apostas vencedoras. Podem
+	 * ocorrer mensagens de erro, como por exemplo: pedir o rateio de um cenário inexistente ou ainda aberto.
+	 * 
+	 * @param cenario : identificador de um cenário.
+	 * 
+	 * @return : retorna o rateio total de um cenário, ou uma mensagem de erro, se for o caso.
+	 */
 	public int getTotalRateioCenario(int cenario) {
-		return this.cenarios.get(cenario).somaApostasPerdedoras() - this.getCaixaCenario(cenario);
+		if(cenarios.containsKey(cenario)) {
+			String aux = cenarios.get(cenario).getStatus();
+			if(aux.equals("Finalizado (ocorreu)") || aux.equals("Finalizado (n ocorreu)")){
+				return this.cenarios.get(cenario).somaApostasPerdedoras() - this.getCaixaCenario(cenario);
+			}
+			else
+				throw new IllegalArgumentException("Erro na consulta do total de rateio do cenario: Cenario ainda esta aberto");
+		}
+		else if(cenario <= 0) {
+			throw new IllegalArgumentException("Erro na consulta do total de rateio do cenario: Cenario invalido");
+		}
+		else {
+			throw new IllegalArgumentException("Erro na consulta do total de rateio do cenario: Cenario nao cadastrado");
+		}
 	}
-	
 }

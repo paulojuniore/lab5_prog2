@@ -2,7 +2,7 @@ package lab5.paulojunior;
 
 /**
  * 
- * Representa uma Aposta. Toda aposta possui um apostador, valor da aposta e previsão de o apostador ganhar a aposta.
+ * Representa uma Aposta. Toda aposta possui um apostador, valor da aposta e previsão de o apostador ganhar ou perder a aposta.
  * 
  * @author Paulo Mendes da Silva Júnior - 117210922
  *
@@ -20,24 +20,27 @@ public class Aposta {
 	private int valorAposta;
 	
 	/**
-	 * Previsão de apostador ganhar ou não a aposta.
+	 * Previsão de apostador ganhar ou perder a aposta.
 	 */
 	private String previsao;
 		
+	
 	/**
-	 * Constrói uma aposta a partir do nome do apostador, valor da aposta e previsão de o apostador ganhar a aposta.
+	 * Constrói uma aposta a partir do nome do apostador, valor da aposta e previsão da aposta.
 	 * 
 	 * @param nome : nome do apostador.
 	 * @param valorAposta : valor da aposta.
-	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
+	 * @param previsao : previsão de o apostador ganhar ou perder a aposta.
 	 */
 	public Aposta(String nome, int valorAposta, String previsao) {
 		if(nome == null || nome.trim().isEmpty())
-			throw new IllegalArgumentException("Nome inválido!\n");
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Apostador nao pode ser vazio ou nulo");
 		else if(valorAposta <= 0)
-			throw new NumberFormatException("Valor de aposta inválido!\n");
+			throw new NumberFormatException("Erro no cadastro de aposta: Valor nao pode ser menor ou igual a zero");
 		else if(previsao == null || previsao.trim().isEmpty())
-			throw new IllegalArgumentException("Previsão de aposta inválida!\n");
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Previsao nao pode ser vazia ou nula");
+		else if(!previsao.equals("VAI ACONTECER") && !previsao.equals("N VAI ACONTECER"))
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Previsao invalida");
 		
 		this.nome = nome;
 		this.valorAposta = valorAposta;
