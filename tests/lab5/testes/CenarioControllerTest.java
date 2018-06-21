@@ -76,10 +76,10 @@ public class CenarioControllerTest {
 	@Test
 	public void testCadastrarAposta() {
 		sistema.cadastrarAposta(1, "Paulo", 50, "VAI ACONTECER");
-		sistema.cadastrarAposta(1, "Paulo", 100, "NAO VAI ACONTECER");
+		sistema.cadastrarAposta(1, "Paulo", 100, "N VAI ACONTECER");
 		sistema.cadastrarAposta(2, "João", 30, "VAI ACONTECER");
 		assertEquals(2, sistema.totalDeApostas(1));
-		sistema.cadastrarAposta(2, "Felipe", 50, "NAO VAI ACONTECER");
+		sistema.cadastrarAposta(2, "Felipe", 50, "N VAI ACONTECER");
 		sistema.cadastrarAposta(2, "Paulo", 20, "VAI ACONTECER");
 		assertEquals(3, sistema.totalDeApostas(2));
 	}
@@ -90,10 +90,10 @@ public class CenarioControllerTest {
 	@Test
 	public void testGetValorTotalEmApostas() {
 		sistema.cadastrarAposta(1, "Paulo", 50, "VAI ACONTECER");
-		sistema.cadastrarAposta(1, "Paulo", 100, "NAO VAI ACONTECER");
+		sistema.cadastrarAposta(1, "Paulo", 100, "N VAI ACONTECER");
 		assertEquals(150, sistema.valorTotalEmApostas(1));
 		sistema.cadastrarAposta(2, "João", 30, "VAI ACONTECER");
-		sistema.cadastrarAposta(2, "Felipe", 50, "NAO VAI ACONTECER");
+		sistema.cadastrarAposta(2, "Felipe", 50, "N VAI ACONTECER");
 		sistema.cadastrarAposta(2, "Paulo", 20, "VAI ACONTECER");
 		assertEquals(100, sistema.valorTotalEmApostas(2));
 	}
