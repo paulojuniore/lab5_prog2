@@ -1,7 +1,6 @@
 package lab5.paulojunior;
 
 /**
- * 
  * Representa uma Aposta. Toda aposta possui um apostador, valor da aposta e previsão de o apostador ganhar ou perder a aposta.
  * 
  * @author Paulo Mendes da Silva Júnior - 117210922
