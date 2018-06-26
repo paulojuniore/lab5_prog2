@@ -36,6 +36,10 @@ public class Facade {
 		return system.cadastrarCenario(descricao);
 	}
 	
+	public int cadastrarCenario(String descricao, int bonus) {
+		return system.cadastrarCenario(descricao, bonus);
+	}
+	
 	/**
 	 * Exibe um cenário já existente a partir do seu número de identificação.
 	 * 
@@ -149,7 +153,7 @@ public class Facade {
 	 */
 	public static void main(String[] args) {
 		args = new String[] {"lab5.paulojunior.Facade", "acceptance_tests/us1_test.txt", "acceptance_tests/us2_test.txt", 
-				"acceptance_tests/us3_test.txt", "acceptance_tests/us4_test.txt"};
+				"acceptance_tests/us3_test.txt", "acceptance_tests/us4_test.txt", "acceptance_tests/us5_test.txt"};
 		EasyAccept.main(args);
 	}
 	

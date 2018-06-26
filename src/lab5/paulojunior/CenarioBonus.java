@@ -1,5 +1,13 @@
 package lab5.paulojunior;
 
+/**
+ * Representa um cenário que possui um bônus, estende a classe cenário que possui todos os atributos de um cenário comum,
+ * com o acréscimo de um bônus.
+ * 
+ * @author Paulo Mendes da Silva Júnior - 117210922
+ *
+ */
+
 public class CenarioBonus extends Cenario{
 	
 	/**
@@ -28,5 +36,18 @@ public class CenarioBonus extends Cenario{
 	public int getBonus() {
 		return bonus;
 	}
-
+	
+	public int getRateioTotalCenario(double taxa) {
+		return super.getRateioTotalCenario(taxa) + this.bonus;
+	}
+	
+	/**
+	 * Retorna a representação String de um cenário com bônus.
+	 * 
+	 * @return : retorna a representação String de um cenário com bônus.
+	 */
+	public String toString() {
+		return super.getId() + " - " + super.getDescricao() + " - " + super.getStatus() + " - R$ " +
+		String.format("%.2f", (float) this.bonus/100);
+	}
 }

@@ -47,7 +47,6 @@ public class CenarioController {
 		this.caixa = caixa;
 		this.taxa = taxa;
 		this.cenarios = new HashMap<>();
-		
 	}
 		
 	/**
@@ -60,6 +59,21 @@ public class CenarioController {
 	public int cadastrarCenario(String descricao) {
 		Cenario cenario = new Cenario(idCenario, descricao);
 		cenarios.put(this.idCenario, cenario);
+		return this.idCenario++;
+	}
+	
+	/**
+	 * Cadastra um novo cenário que possui um bônus.
+	 * 
+	 * @param descricao : descrição do cenário de apostas.
+	 * @param bonus : bônus a ser inserido no caixa.
+	 * 
+	 * @return : retorna um int representando o identificador do cenário.
+	 */
+	public int cadastrarCenario(String descricao, int bonus) {
+		Cenario cenario = new CenarioBonus(idCenario, descricao, bonus);
+		cenarios.put(this.idCenario, cenario);
+		this.caixa -= bonus;
 		return this.idCenario++;
 	}
 	
@@ -205,7 +219,8 @@ public class CenarioController {
 		if(cenarios.containsKey(cenario)) {
 			String aux = cenarios.get(cenario).getStatus();
 			if(aux.equals("Finalizado (ocorreu)") || aux.equals("Finalizado (n ocorreu)")){
-				return (int) (this.cenarios.get(cenario).somaApostasPerdedoras() * taxa);
+				return this.cenarios.get(cenario).getCaixa(taxa);
+				//return (int) (this.cenarios.get(cenario).somaApostasPerdedoras() * taxa);
 			}
 			else
 				throw new IllegalArgumentException("Erro na consulta do caixa do cenario: Cenario ainda esta aberto");
@@ -230,7 +245,8 @@ public class CenarioController {
 		if(cenarios.containsKey(cenario)) {
 			String aux = cenarios.get(cenario).getStatus();
 			if(aux.equals("Finalizado (ocorreu)") || aux.equals("Finalizado (n ocorreu)")){
-				return this.cenarios.get(cenario).somaApostasPerdedoras() - this.getCaixaCenario(cenario);
+				return this.cenarios.get(cenario).getRateioTotalCenario(taxa);
+				//return this.cenarios.get(cenario).somaApostasPerdedoras() - this.getCaixaCenario(cenario);
 			}
 			else
 				throw new IllegalArgumentException("Erro na consulta do total de rateio do cenario: Cenario ainda esta aberto");

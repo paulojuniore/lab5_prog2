@@ -3,8 +3,8 @@ package lab5.paulojunior;
 import java.util.ArrayList;
 
 /**
- * Representa um cenário de apostas. Todo cenário possui uma descrição, um status (Finalizado/Nao finalizado), 
- * uma previsão de acontecimento da aposta (true/false), um conjunto de apostas e um identificador único de um cenário.
+ * Representa um cenário de apostas. Todo cenário possui uma descrição, um status (Finalizado/Nao finalizado), uma 
+ * previsão de acontecimento da aposta (true/false), um conjunto de apostas e um identificador único de um cenário.
  * 
  * @author Paulo Mendes da Silva Júnior - 117210922
  *
@@ -107,12 +107,29 @@ public class Cenario {
 	}
 	
 	/**
+	 * Retorna a descrição de um cenário.
+	 * 
+	 * @return : retorna a descrição de um cenário.
+	 */
+	public String getDescricao() {
+		return descricao;
+	}
+	
+	/**
 	 * Retorna o status de um cenário.
 	 * 
 	 * @return : retorna o status de um cenário.
 	 */
 	public String getStatus() {
 		return status;
+	}
+	
+	public int getCaixa(double taxa) {
+		return (int) Math.floor(this.somaApostasPerdedoras() * taxa);
+	}
+	
+	public int getRateioTotalCenario(double taxa) {
+		return (int) Math.floor(this.somaApostasPerdedoras() - getCaixa(taxa));
 	}
 	
 	/**
