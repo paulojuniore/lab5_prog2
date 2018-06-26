@@ -25,6 +25,8 @@ public class CenarioBonus extends Cenario{
 	 */
 	public CenarioBonus(int id, String descricao, int bonus) {
 		super(id, descricao);
+		if(bonus <= 0)
+			throw new IllegalArgumentException("Erro no cadastro de cenario: Bonus invalido");
 		this.bonus = bonus;
 	}
 	
@@ -37,6 +39,13 @@ public class CenarioBonus extends Cenario{
 		return bonus;
 	}
 	
+	/**
+	 * Retorna o rateio total do cenário a partir da taxa do sistema.
+	 * 
+	 * @param taxa : taxa do sistema.
+	 * 
+	 * @return : retorna o rateio total do cenário que será dividido entre as apostas vencedoras.
+	 */
 	public int getRateioTotalCenario(double taxa) {
 		return super.getRateioTotalCenario(taxa) + this.bonus;
 	}
@@ -48,6 +57,6 @@ public class CenarioBonus extends Cenario{
 	 */
 	public String toString() {
 		return super.getId() + " - " + super.getDescricao() + " - " + super.getStatus() + " - R$ " +
-		String.format("%.2f", (float) this.bonus/100);
+		String.format("%.2f", (float) this.bonus / 100);
 	}
 }

@@ -65,12 +65,31 @@ public class Cenario {
 	 * 
 	 * @param apostador : nome do apostador.
 	 * @param valor : valor da aposta.
-	 * @param previsao : previsão de se o apostador vai ganhar ou não.
+	 * @param previsao : previsão de se o apostador vai ganhar ou não a aposta.
 	 */
 	public void fazerAposta(String apostador, int valor, String previsao) {
 		Aposta aposta = new Aposta(apostador, valor, previsao);
 		this.apostas.add(aposta);
 		this.valorTotalEmApostas += aposta.getValor();	
+	}
+	
+	/**
+	 * Cadastra uma nova aposta por valor ou por taxa em um cenário.
+	 * 
+	 * @param apostador : nome do apostador.
+	 * @param valor : valor da aposta.
+	 * @param previsao : previsão de se o apostador vai ganhar ou não a aposta.
+	 * @param tipoSeguro : tipo do seguro. (VALOR ou TAXA)
+	 * @param taxaOuValor : taxa ou valor a ser assegurado.
+	 * @param custoSeguro : custo do seguro.
+	 */
+	public void fazerAposta(String apostador, int valor, String previsao, String tipoSeguro, int taxaOuValor, int custoSeguro) {
+		if(tipoSeguro.equals("VALOR")) {
+			Aposta aposta = new ApostaSeguradaValor(apostador, valor, previsao, tipoSeguro, taxaOuValor, custoSeguro);
+		}
+		else if(tipoSeguro.equals("TAXA")) {
+			Aposta aposta = new ApostaSeguradaTaxa(apostador, valor, previsao, tipoSeguro, taxaOuValor, custoSeguro);
+		}
 	}
 	
 	/**
@@ -124,10 +143,25 @@ public class Cenario {
 		return status;
 	}
 	
+	/**
+	 * Retorna o valor que será destinado ao caixa do sistema. Que é a soma das apostas perdedoras multiplicada
+	 * pela taxa do sistema.
+	 * 
+	 * @param taxa : taxa de desconto do sistema.
+	 * 
+	 * @return : valor que será destinado ao caixa do sistema.
+	 */
 	public int getCaixa(double taxa) {
 		return (int) Math.floor(this.somaApostasPerdedoras() * taxa);
 	}
 	
+	/**
+	 * Retorna o rateio total do cenário. Que é o valor que será dividido entre as apostas vencedoras.
+	 * 
+	 * @param taxa : taxa do sistema.
+	 * 
+	 * @return : retorna o rateio total do cenário.
+	 */
 	public int getRateioTotalCenario(double taxa) {
 		return (int) Math.floor(this.somaApostasPerdedoras() - getCaixa(taxa));
 	}

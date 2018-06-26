@@ -11,6 +11,11 @@ package lab5.paulojunior;
 public class ApostaSeguradaValor extends Aposta{
 	
 	/**
+	 * Representa o tipo de seguro. (VALOR ou TAXA)
+	 */
+	private String tipoSeguro;
+	
+	/**
 	 * Representa o valor assegurado de uma aposta.
 	 */
 	private int valorAssegurado;
@@ -30,8 +35,9 @@ public class ApostaSeguradaValor extends Aposta{
 	 * @param valorAssegurado : valor assegurado pela aposta.
 	 * @param custoSeguro : custo do seguro da aposta.
 	 */
-	public ApostaSeguradaValor(String nome, int valorAposta, String previsao, int valorAssegurado, int custoSeguro) {
+	public ApostaSeguradaValor(String nome, int valorAposta, String previsao, String tipoSeguro, int valorAssegurado, int custoSeguro) {
 		super(nome, valorAposta, previsao);
+		this.tipoSeguro = tipoSeguro;
 		this.valorAssegurado = valorAssegurado;
 		this.custoSeguro = custoSeguro;
 	}
