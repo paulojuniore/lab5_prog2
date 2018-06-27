@@ -81,6 +81,42 @@ public class Facade {
 	}
 	
 	/**
+	 * Cadastra uma aposta assegurada por valor. Retorna um identificador para a aposta.
+	 * 
+	 * @param cenario : identificador do cenário em que será cadastrada a aposta.
+	 * @param apostador : nome do apostador.
+	 * @param valorAposta : valor da aposta.
+	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
+	 * @param valorSeguro : valor a ser assegurado.
+	 * @param custoSeguro : custo do seguro.
+	 */
+	public void cadastrarApostaSeguraValor(int cenario, String apostador, int valorAposta, String previsao, int valorSeguro, int custoSeguro) {
+		system.cadastrarApostaSeguradaValor(cenario, apostador, valorAposta, previsao, valorSeguro, custoSeguro);
+	}
+	
+	/**
+	 * Cadastra uma aposta assegurada por taxa. Retorna um identificador para a aposta.
+	 * 
+	 * @param cenario : identificador do cenário em que será cadastrada a aposta.
+	 * @param apostador : nome do apostador.
+	 * @param valorAposta : valor da aposta.
+	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
+	 * @param taxaSeguro : taxa a ser assegurada.
+	 * @param custoSeguro : custo do seguro.
+	 */
+	public void cadastrarApostaSeguraTaxa(int cenario, String apostador, int valorAposta, String previsao, double taxaSeguro, int custoSeguro) {
+		system.cadastrarApostaSeguradaTaxa(cenario, apostador, valorAposta, previsao, taxaSeguro, custoSeguro);
+	}
+	
+//	public int alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
+//		
+//	}
+//	
+//	public int alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
+//		
+//	}
+//	
+	/**
 	 * Retorna o número de apostas cadastradas em um cenário.
 	 * 
 	 * @param cenario : número do cenário.

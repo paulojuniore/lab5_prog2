@@ -1,8 +1,8 @@
 package lab5.paulojunior;
 
 /**
- * Representa um tipo de aposta, que é a aposta segurada com taxa, toda Aposta Assegurada possui todos os atributos
- * de uma aposta comum com o acréscimo de uma taxa de seguro.
+ * Representa um tipo de aposta, que é a aposta segurada com taxa, toda Aposta Assegurada por Taxa possui todos 
+ * os atributos de uma aposta comum com o acréscimo de uma taxa a ser assegurada e o custo do seguro.
  * 
  * @author Paulo Mendes da Silva Júnior - 117210922
  *
@@ -11,14 +11,9 @@ package lab5.paulojunior;
 public class ApostaSeguradaTaxa extends Aposta{
 	
 	/**
-	 * Representa o tipo de seguro. (VALOR ou TAXA)
-	 */
-	private String tipoSeguro;
-	
-	/**
 	 * Representa a taxa assegurada de uma aposta.
 	 */
-	private int taxaAssegurada;
+	private double taxaSeguro;
 	
 	/**
 	 * Representa o custo do segura da aposta.
@@ -32,13 +27,12 @@ public class ApostaSeguradaTaxa extends Aposta{
 	 * @param nome : nome do apostador.
 	 * @param valorAposta : valor da aposta.
 	 * @param previsao : previsão de o apostador ganhar a aposta.
-	 * @param taxaAssegurada : taxa de seguro da aposta.
+	 * @param taxaSeguro : taxa de seguro da aposta.
 	 * @param custoSeguro : custo do seguro de uma aposta.
 	 */
-	public ApostaSeguradaTaxa(String nome, int valorAposta, String previsao, String tipoSeguro, int taxaAssegurada, int custoSeguro) {
+	public ApostaSeguradaTaxa(String nome, int valorAposta, String previsao, double taxaSeguro, int custoSeguro) {
 		super(nome, valorAposta, previsao);
-		this.tipoSeguro = tipoSeguro;
-		this.taxaAssegurada = taxaAssegurada;
+		this.taxaSeguro = taxaSeguro;
 		this.custoSeguro = custoSeguro;
 	}
 	
@@ -47,8 +41,8 @@ public class ApostaSeguradaTaxa extends Aposta{
 	 * 
 	 * @return : retorna a taxa assegurada de uma aposta.
 	 */
-	public int getTaxaAssegurada() {
-		return taxaAssegurada;
+	public double getTaxaSeguro() {
+		return taxaSeguro;
 	}
 	
 	/**
@@ -58,6 +52,15 @@ public class ApostaSeguradaTaxa extends Aposta{
 	 */
 	public int getCustoSeguro() {
 		return custoSeguro;
+	}
+	
+	/**
+	 * Representação String de uma Aposta Assegurada pro Taxa.
+	 * 
+	 * @return : retorna a representação String de uma aposta assegurada por taxa.
+	 */
+	public String toString() {
+		return super.getNome() + " - R$" + super.getValor() + " - " + super.getPrevisao() + " - ASSEGURADA (TAXA) - R$" + getTaxaSeguro();
 	}
 
 }

@@ -1,19 +1,14 @@
 package lab5.paulojunior;
 
 /**
- * Representa um tipo de aposta, que é a aposta segurada com valor, toda Aposta Assegurada possui todos os atributos
- * de uma aposta comum com o acréscimo de um valor de seguro.
+ * Representa um tipo de aposta, que é a aposta segurada com valor, toda Aposta Assegurada por Valor possui todos 
+ * os atributos de uma aposta comum com o acréscimo de um valor a ser assegurado e o custo do seguro.
  * 
  * @author Paulo Mendes da Silva Júnior - 117210922
  *
  */
 
 public class ApostaSeguradaValor extends Aposta{
-	
-	/**
-	 * Representa o tipo de seguro. (VALOR ou TAXA)
-	 */
-	private String tipoSeguro;
 	
 	/**
 	 * Representa o valor assegurado de uma aposta.
@@ -35,9 +30,8 @@ public class ApostaSeguradaValor extends Aposta{
 	 * @param valorAssegurado : valor assegurado pela aposta.
 	 * @param custoSeguro : custo do seguro da aposta.
 	 */
-	public ApostaSeguradaValor(String nome, int valorAposta, String previsao, String tipoSeguro, int valorAssegurado, int custoSeguro) {
+	public ApostaSeguradaValor(String nome, int valorAposta, String previsao, int valorAssegurado, int custoSeguro) {
 		super(nome, valorAposta, previsao);
-		this.tipoSeguro = tipoSeguro;
 		this.valorAssegurado = valorAssegurado;
 		this.custoSeguro = custoSeguro;
 	}
@@ -58,6 +52,15 @@ public class ApostaSeguradaValor extends Aposta{
 	 */
 	public int getCustoSeguro() {
 		return custoSeguro;
+	}
+	
+	/**
+	 * Representação String de uma Aposta Assegurada por Valor.
+	 * 
+	 * @return : retorna a representação String de uma aposta assegurada por valor.
+	 */
+	public String toString() {
+		return super.getNome() + " - R$" + super.getValor() + " - " + super.getPrevisao() + " - ASSEGURADA (VALOR) - R$" + String.format("%.2f", (float) getValorAssegurado()); 
 	}
 
 }

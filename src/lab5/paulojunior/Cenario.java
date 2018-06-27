@@ -74,24 +74,37 @@ public class Cenario {
 	}
 	
 	/**
-	 * Cadastra uma nova aposta por valor ou por taxa em um cenário.
+	 * Concretiza uma aposta assegurada por valor, já com todos os atributos verificados e válidos.
 	 * 
+	 * @param cenario : identificador do cenário em que será cadastrada a aposta.
 	 * @param apostador : nome do apostador.
-	 * @param valor : valor da aposta.
-	 * @param previsao : previsão de se o apostador vai ganhar ou não a aposta.
-	 * @param tipoSeguro : tipo do seguro. (VALOR ou TAXA)
-	 * @param taxaOuValor : taxa ou valor a ser assegurado.
+	 * @param valorAposta : valor da aposta.
+	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
+	 * @param valorSeguro : valor a ser assegurado pelo cenário.
 	 * @param custoSeguro : custo do seguro.
 	 */
-	public void fazerAposta(String apostador, int valor, String previsao, String tipoSeguro, int taxaOuValor, int custoSeguro) {
-		if(tipoSeguro.equals("VALOR")) {
-			Aposta aposta = new ApostaSeguradaValor(apostador, valor, previsao, tipoSeguro, taxaOuValor, custoSeguro);
-		}
-		else if(tipoSeguro.equals("TAXA")) {
-			Aposta aposta = new ApostaSeguradaTaxa(apostador, valor, previsao, tipoSeguro, taxaOuValor, custoSeguro);
-		}
+	public void fazerApostaSeguradaValor(int cenario, String apostador, int valorAposta, String previsao, int valorSeguro, int custoSeguro) {
+		Aposta aposta = new ApostaSeguradaValor(apostador, valorAposta, previsao, valorSeguro, custoSeguro);
+		this.apostas.add(aposta);
+		this.valorTotalEmApostas += aposta.getValor();
 	}
 	
+	/**
+	 * Concretiza uma aposta assegurada por taxa, já com todos os atributos verificados e válidos.
+	 * 
+	 * @param cenario : identificador do cenário em que será cadastrada a aposta.
+	 * @param apostador : nome do apostador.
+	 * @param valorAposta : valor da aposta.
+	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
+	 * @param taxaSeguro : taxa a ser assegurada pelo cenário.
+	 * @param custoSeguro : custo do seguro.
+	 */
+	public void fazerApostaSeguradaTaxa(int cenario, String apostador, int valorAposta, String previsao, double taxaSeguro, int custoSeguro) {
+		Aposta aposta = new ApostaSeguradaTaxa(apostador, valorAposta, previsao, taxaSeguro, custoSeguro);
+		this.apostas.add(aposta);
+		this.valorTotalEmApostas += aposta.getValor();
+	}
+		
 	/**
 	 * Encerra um cenário existente.
 	 * 

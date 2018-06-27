@@ -141,6 +141,64 @@ public class CenarioController {
 	}
 	
 	/**
+	 * Cadastra uma aposta assegurada por valor. Pode lançar alguma exceção caso algum dado inválido seja inserido.
+	 * 
+	 * @param cenario : identificador do cenário.
+	 * @param apostador : nome do apostador.
+	 * @param valorAposta : valor da aposta.
+	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
+	 * @param valorSeguro : valor a ser assegurado.
+	 * @param custoSeguro : custo do seguro.
+	 */
+	public void cadastrarApostaSeguradaValor(int cenario, String apostador, int valorAposta, String previsao, int valorSeguro, int custoSeguro) {
+		if(cenarios.containsKey(cenario)) {
+			if(apostador == null || apostador.trim().isEmpty())
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Apostador nao pode ser vazio ou nulo");
+			if(valorAposta <= 0) 
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Valor nao pode ser menor ou igual a zero");
+			else if(previsao == null || previsao.trim().isEmpty())
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Previsao nao pode ser vazia ou nula");
+			if(!previsao.equals("VAI ACONTECER") && !previsao.equals("N VAI ACONTECER"))
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Previsao invalida");
+			
+			Cenario aux = this.cenarios.get(cenario);
+			aux.fazerApostaSeguradaValor(cenario, apostador, valorAposta, previsao, valorSeguro, custoSeguro);
+		}
+		else if(cenario <= 0) {
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Cenario invalido");
+		}
+	}
+	
+	/**
+	 * Cadastra uma aposta assegurada por taxa. Pode lançar alguma exceção caso algum dado inválido seja inserido.
+	 *  
+	 * @param cenario : identificador do cenário em que será cadastrada a aposta.
+	 * @param apostador : nome do apostador.
+	 * @param valorAposta : valor da aposta.
+	 * @param previsao : previsão de apostador ganhar ou não a aposta.
+	 * @param taxaSeguro : taxa a ser assegurada.
+	 * @param custoSeguro : custo do seguro.
+	 */
+	public void cadastrarApostaSeguradaTaxa(int cenario, String apostador, int valorAposta, String previsao, double taxaSeguro, int custoSeguro) {
+		if(cenarios.containsKey(cenario)) {
+			if(apostador == null || apostador.trim().isEmpty())
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Apostador nao pode ser vazio ou nulo");
+			if(valorAposta <= 0) 
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Valor nao pode ser menor ou igual a zero");
+			if(previsao == null || previsao.trim().isEmpty())
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Previsao nao pode ser vazia ou nula");
+			if(!previsao.equals("VAI ACONTECER") && !previsao.equals("N VAI ACONTECER"))
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Previsao invalida");
+			
+			Cenario aux = this.cenarios.get(cenario);
+			aux.fazerApostaSeguradaTaxa(cenario, apostador, valorAposta, previsao, taxaSeguro, custoSeguro);
+		}
+		else if(cenario <= 0) {
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Cenario invalido");
+		}
+	}
+	
+	/**
 	 * Retorna a quantidade de dinheiro contida no caixa.
 	 * 
 	 * @return : retorna a a quantidade de dinheiro contida no caixa.
@@ -213,6 +271,8 @@ public class CenarioController {
 	 * Retorna a quantidade de dinheiro que será destinada ao caixa. Podem ocorrer mensagens de erro, como por exemplo:
 	 * tentar retornar a quantidade de dinheiro do caixa de um cenário que ainda está aberto ou um cenário inexistente.
 	 * 
+	 * @param cenario : identificador de um cenário.
+	 * 
 	 * @return : retorna a quantidade de dinheiro que será destinada ao caixa.
 	 */
 	public int getCaixaCenario(int cenario) {
@@ -220,7 +280,6 @@ public class CenarioController {
 			String aux = cenarios.get(cenario).getStatus();
 			if(aux.equals("Finalizado (ocorreu)") || aux.equals("Finalizado (n ocorreu)")){
 				return this.cenarios.get(cenario).getCaixa(taxa);
-				//return (int) (this.cenarios.get(cenario).somaApostasPerdedoras() * taxa);
 			}
 			else
 				throw new IllegalArgumentException("Erro na consulta do caixa do cenario: Cenario ainda esta aberto");
@@ -246,7 +305,6 @@ public class CenarioController {
 			String aux = cenarios.get(cenario).getStatus();
 			if(aux.equals("Finalizado (ocorreu)") || aux.equals("Finalizado (n ocorreu)")){
 				return this.cenarios.get(cenario).getRateioTotalCenario(taxa);
-				//return this.cenarios.get(cenario).somaApostasPerdedoras() - this.getCaixaCenario(cenario);
 			}
 			else
 				throw new IllegalArgumentException("Erro na consulta do total de rateio do cenario: Cenario ainda esta aberto");

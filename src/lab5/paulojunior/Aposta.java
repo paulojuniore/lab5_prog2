@@ -47,6 +47,15 @@ public class Aposta {
 	}
 	
 	/**
+	 * Retorna o nome do apostador.
+	 * 
+	 * @return : retorna o nome do apostador.
+	 */
+	public String getNome() {
+		return nome;
+	}
+	
+	/**
 	 * Retorna o valor da aposta.
 	 * 
 	 * @return : retorna o valor da aposta.
