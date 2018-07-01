@@ -89,9 +89,11 @@ public class Facade {
 	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
 	 * @param valorSeguro : valor a ser assegurado.
 	 * @param custoSeguro : custo do seguro.
+	 * 
+	 * @return : retorna um identificador único para a aposta.
 	 */
-	public void cadastrarApostaSeguraValor(int cenario, String apostador, int valorAposta, String previsao, int valorSeguro, int custoSeguro) {
-		system.cadastrarApostaSeguradaValor(cenario, apostador, valorAposta, previsao, valorSeguro, custoSeguro);
+	public int cadastrarApostaSeguraValor(int cenario, String apostador, int valorAposta, String previsao, int valorSeguro, int custoSeguro) {
+		return system.cadastrarApostaSeguradaValor(cenario, apostador, valorAposta, previsao, valorSeguro, custoSeguro);
 	}
 	
 	/**
@@ -103,19 +105,39 @@ public class Facade {
 	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
 	 * @param taxaSeguro : taxa a ser assegurada.
 	 * @param custoSeguro : custo do seguro.
+	 * 
+	 * @return : retorna um identificador único para a aposta.
 	 */
-	public void cadastrarApostaSeguraTaxa(int cenario, String apostador, int valorAposta, String previsao, double taxaSeguro, int custoSeguro) {
-		system.cadastrarApostaSeguradaTaxa(cenario, apostador, valorAposta, previsao, taxaSeguro, custoSeguro);
+	public int cadastrarApostaSeguraTaxa(int cenario, String apostador, int valorAposta, String previsao, double taxaSeguro, int custoSeguro) {
+		return system.cadastrarApostaSeguradaTaxa(cenario, apostador, valorAposta, previsao, taxaSeguro, custoSeguro);
 	}
 	
-//	public int alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
-//		
-//	}
-//	
-//	public int alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
-//		
-//	}
-//	
+	/**
+	 * Altera uma aposta assegurada por taxa, para uma assegurada por valor.
+	 * 
+	 * @param cenario : identificador do cenário em que será cadastrada a aposta.
+	 * @param apostaAssegurada : identificador da aposta assegurada por taxa a ser alterada.
+	 * @param valor : valor do seguro.
+	 * 
+	 * @return : retorna um identificador único para a aposta assegurada por valor.
+	 */
+	public int alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
+		return system.alterarSeguroValor(cenario, apostaAssegurada, valor);
+	}
+	
+	/**
+	 * Altera uma aposta assegurada por valor, para uma assegurada por taxa.
+	 * 
+	 * @param cenario : identificador do cenário em que será cadastrada a aposta.
+	 * @param apostaAssegurada : identificador da aposta assegurada por taxa a ser alterada.
+	 * @param taxa : taxa do seguro.
+	 * 
+	 * @return : retorna um identificador único para a aposta assegurada por valor.
+	 */
+	public int alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
+		return system.alterarSeguroTaxa(cenario, apostaAssegurada, taxa);
+	}
+	
 	/**
 	 * Retorna o número de apostas cadastradas em um cenário.
 	 * 

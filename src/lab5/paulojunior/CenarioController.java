@@ -149,8 +149,10 @@ public class CenarioController {
 	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
 	 * @param valorSeguro : valor a ser assegurado.
 	 * @param custoSeguro : custo do seguro.
+	 * 
+	 * @return : retorna o identificador único da aposta, caso todos os dados sejam válidos.
 	 */
-	public void cadastrarApostaSeguradaValor(int cenario, String apostador, int valorAposta, String previsao, int valorSeguro, int custoSeguro) {
+	public int cadastrarApostaSeguradaValor(int cenario, String apostador, int valorAposta, String previsao, int valorSeguro, int custoSeguro) {
 		if(cenarios.containsKey(cenario)) {
 			if(apostador == null || apostador.trim().isEmpty())
 				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Apostador nao pode ser vazio ou nulo");
@@ -162,11 +164,12 @@ public class CenarioController {
 				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Previsao invalida");
 			
 			Cenario aux = this.cenarios.get(cenario);
-			aux.fazerApostaSeguradaValor(cenario, apostador, valorAposta, previsao, valorSeguro, custoSeguro);
+			return aux.fazerApostaSeguradaValor(cenario, apostador, valorAposta, previsao, valorSeguro, custoSeguro);
 		}
 		else if(cenario <= 0) {
 			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Cenario invalido");
 		}
+		return 0;
 	}
 	
 	/**
@@ -178,8 +181,10 @@ public class CenarioController {
 	 * @param previsao : previsão de apostador ganhar ou não a aposta.
 	 * @param taxaSeguro : taxa a ser assegurada.
 	 * @param custoSeguro : custo do seguro.
+	 * 
+	 * @return : retorna um identificador único de uma aposta assegurada por taxa, caso todos os dados sejam válidos.
 	 */
-	public void cadastrarApostaSeguradaTaxa(int cenario, String apostador, int valorAposta, String previsao, double taxaSeguro, int custoSeguro) {
+	public int cadastrarApostaSeguradaTaxa(int cenario, String apostador, int valorAposta, String previsao, double taxaSeguro, int custoSeguro) {
 		if(cenarios.containsKey(cenario)) {
 			if(apostador == null || apostador.trim().isEmpty())
 				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Apostador nao pode ser vazio ou nulo");
@@ -191,11 +196,52 @@ public class CenarioController {
 				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Previsao invalida");
 			
 			Cenario aux = this.cenarios.get(cenario);
-			aux.fazerApostaSeguradaTaxa(cenario, apostador, valorAposta, previsao, taxaSeguro, custoSeguro);
+			return aux.fazerApostaSeguradaTaxa(cenario, apostador, valorAposta, previsao, taxaSeguro, custoSeguro);
 		}
 		else if(cenario <= 0) {
 			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Cenario invalido");
 		}
+		return 0;
+	}
+	
+	/**
+	 * Altera uma aposta assegurada por taxa, para uma assegurada por valor.
+	 * 
+	 * @param cenario : identificador do cenário em que a aposta será alterada.
+	 * @param apostaAssegurada : identificador da aposta a ser alterada.
+	 * @param valor : valor a ser assegurado após a alteração.
+	 * 
+	 * @return : retorna o identificador da aposta após ser alterada. 
+	 */
+	public int alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
+		if(cenarios.containsKey(cenario)) {
+			Cenario aux = cenarios.get(cenario);
+			if(aux.getApostas(apostaAssegurada) != null) {
+				ApostaSeguradaTaxa aposta = (ApostaSeguradaTaxa) aux.getApostas(apostaAssegurada);
+				return aux.alteraApostaValor(aposta, apostaAssegurada, valor);
+			}
+		}
+		return 0;
+	}
+	
+	/**
+	 * Altera uma aposta assegurada por valor, para uma assegurada por taxa.
+	 * 
+	 * @param cenario : identificador do cenário em que a aposta será alterada.
+	 * @param apostaAssegurada : identificador da aposta a ser alterada.
+	 * @param taxa : taxa a ser assegurada após a alteração.
+	 * 
+	 * @return : retorna o identificador da aposta após ser alterada. 
+	 */
+	public int alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
+		if(cenarios.containsKey(cenario)) {
+			Cenario aux = cenarios.get(cenario);
+			if(aux.getApostas(apostaAssegurada) != null) {
+				ApostaSeguradaValor aposta = (ApostaSeguradaValor) aux.getApostas(apostaAssegurada);
+				return aux.alteraApostaTaxa(aposta, apostaAssegurada, taxa);
+			}
+		}
+		return 0;
 	}
 	
 	/**

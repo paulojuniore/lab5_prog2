@@ -19,6 +19,11 @@ public class ApostaSeguradaTaxa extends Aposta{
 	 * Representa o custo do segura da aposta.
 	 */
 	private int custoSeguro;
+	
+//	/**
+//	 * Representa o identificador único de uma aposta.
+//	 */
+//	private int id = 1;
 
 	
 	/**
@@ -34,6 +39,7 @@ public class ApostaSeguradaTaxa extends Aposta{
 		super(nome, valorAposta, previsao);
 		this.taxaSeguro = taxaSeguro;
 		this.custoSeguro = custoSeguro;
+		//this.id++;
 	}
 	
 	/**

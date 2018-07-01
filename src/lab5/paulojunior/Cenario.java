@@ -82,11 +82,14 @@ public class Cenario {
 	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
 	 * @param valorSeguro : valor a ser assegurado pelo cenário.
 	 * @param custoSeguro : custo do seguro.
+	 * 
+	 * @return : retorna um identificador único de uma aposta assegurada por valor.
 	 */
-	public void fazerApostaSeguradaValor(int cenario, String apostador, int valorAposta, String previsao, int valorSeguro, int custoSeguro) {
+	public int fazerApostaSeguradaValor(int cenario, String apostador, int valorAposta, String previsao, int valorSeguro, int custoSeguro) {
 		Aposta aposta = new ApostaSeguradaValor(apostador, valorAposta, previsao, valorSeguro, custoSeguro);
 		this.apostas.add(aposta);
 		this.valorTotalEmApostas += aposta.getValor();
+		return apostas.lastIndexOf(aposta);
 	}
 	
 	/**
@@ -98,11 +101,46 @@ public class Cenario {
 	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
 	 * @param taxaSeguro : taxa a ser assegurada pelo cenário.
 	 * @param custoSeguro : custo do seguro.
+	 * 
+	 * @return : retorna um identificador único de uma aposta assegurada por taxa.
 	 */
-	public void fazerApostaSeguradaTaxa(int cenario, String apostador, int valorAposta, String previsao, double taxaSeguro, int custoSeguro) {
+	public int fazerApostaSeguradaTaxa(int cenario, String apostador, int valorAposta, String previsao, double taxaSeguro, int custoSeguro) {
 		Aposta aposta = new ApostaSeguradaTaxa(apostador, valorAposta, previsao, taxaSeguro, custoSeguro);
 		this.apostas.add(aposta);
 		this.valorTotalEmApostas += aposta.getValor();
+		return apostas.lastIndexOf(aposta);
+	}
+	
+	/**
+	 * Altera uma aposta assegurada por taxa, para uma assegurada por valor.
+	 * 
+	 * @param aposta : objeto Aposta a ser alterado.
+	 * @param apostaAssegurada : identificador da aposta assegurada por taxa.
+	 * @param valor : valor da aposta.
+	 * 
+	 * @return : retorna o identificador da aposta após ser alterada.
+	 */
+	public int alteraApostaValor(ApostaSeguradaTaxa aposta, int apostaAssegurada, int valor) {
+		Aposta aux = new ApostaSeguradaValor(aposta.getNome(), aposta.getValor(), aposta.getPrevisao(), valor, aposta.getCustoSeguro());
+		this.apostas.remove(apostaAssegurada);
+		this.apostas.add(aux);
+		return apostas.lastIndexOf(aux);
+	}
+	
+	/**
+	 * Altera uma apostas assegurada por valor, para uma assegurada por taxa.
+	 * 
+	 * @param aposta : objeto Aposta a ser alterado.
+	 * @param apostaAssegurada : identificador da aposta assegurada por valor.
+	 * @param taxa : taxa da aposta.
+	 * 
+	 * @return : retorna o identificador da aposta após ser alterada.
+	 */
+	public int alteraApostaTaxa(ApostaSeguradaValor aposta, int apostaAssegurada, double taxa) {
+		Aposta aux = new ApostaSeguradaTaxa(aposta.getNome(), aposta.getValor(), aposta.getPrevisao(), taxa, aposta.getCustoSeguro());
+		this.apostas.remove(apostaAssegurada);
+		this.apostas.add(aux);
+		return apostas.lastIndexOf(aux);
 	}
 		
 	/**
@@ -136,6 +174,17 @@ public class Cenario {
 			}
 		}
 		return soma;
+	}
+	
+	/**
+	 * Retorna a lista de apostas de um cenário.
+	 * 
+	 * @param i : index da aposta na lista de apostas.
+	 * 
+	 * @return : retorna a lista de apostas de um cenário.
+	 */
+	public Aposta getApostas(int i){
+		return apostas.get(i);
 	}
 	
 	/**
