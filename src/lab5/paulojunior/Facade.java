@@ -212,6 +212,14 @@ public class Facade {
 		return system.getCaixa();
 	}
 	
+//	public void alterarOrdem(String ordem) {
+//		
+//	}
+//	
+//	public String exibirCenario(int cenario) {
+//		
+//	}
+	
 	/**
 	 * Método para testes de aceitação do sistema de apostas.
 	 * 

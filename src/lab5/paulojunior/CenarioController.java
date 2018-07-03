@@ -1,6 +1,10 @@
 package lab5.paulojunior;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+
+import lab5.comparators.DescricaoComparator;
 
 /**
  * Representa um sistema de apostas. Todo Sistema possui um caixa, taxa e um conjunto de cenários.
@@ -8,7 +12,7 @@ import java.util.HashMap;
  * @author Paulo Mendes da Silva Júnior - 117210922
  *
  */
-public class CenarioController {
+public class CenarioController{
 	
 	/**
 	 * Caixa que representa a quantidade de dinheiro do sistema.
@@ -29,6 +33,8 @@ public class CenarioController {
 	 * Representa o identificador de um sistema.
 	 */
 	private int idCenario;
+	
+	private String ordem;
 	
 	
 	/**
@@ -362,4 +368,18 @@ public class CenarioController {
 			throw new IllegalArgumentException("Erro na consulta do total de rateio do cenario: Cenario nao cadastrado");
 		}
 	}
+	
+	public void alterarOrdem(String ordem) {
+		this.ordem = ordem;
+	}
+	
+//	public String exibirCenarioOrdenado(int cenario) {
+//		if(cenarios.containsKey(cenario)) {
+//			if(ordem.equalsIgnoreCase("Nome")) {
+//				DescricaoComparator comparator = new DescricaoComparator();
+//				Collections.sort(cenarios.values().toArray(), comparator);
+//			}
+//		}
+//	}
+	
 }
