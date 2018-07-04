@@ -212,13 +212,13 @@ public class Facade {
 		return system.getCaixa();
 	}
 	
-//	public void alterarOrdem(String ordem) {
-//		
-//	}
-//	
-//	public String exibirCenario(int cenario) {
-//		
-//	}
+	public void alterarOrdem(String ordem) {
+		system.alterarOrdem(ordem);
+	}
+	
+	public String exibirCenarioOrdenado(int cenario) {
+		return system.exibirCenarioOrdenado(cenario);
+	}
 	
 	/**
 	 * Método para testes de aceitação do sistema de apostas.
@@ -228,7 +228,7 @@ public class Facade {
 	public static void main(String[] args) {
 		args = new String[] {"lab5.paulojunior.Facade", "acceptance_tests/us1_test.txt", "acceptance_tests/us2_test.txt", 
 				"acceptance_tests/us3_test.txt", "acceptance_tests/us4_test.txt", "acceptance_tests/us5_test.txt", 
-				"acceptance_tests/us6_test.txt"};
+				"acceptance_tests/us6_test.txt", "acceptance_tests/us7_test.txt"};
 		EasyAccept.main(args);
 	}
 	
