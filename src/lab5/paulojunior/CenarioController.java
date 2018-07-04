@@ -199,6 +199,7 @@ public class CenarioController {
 						"Erro no cadastro de aposta assegurada por valor: Previsao invalida");
 
 			Cenario aux = this.cenarios.get(cenario);
+			this.caixa += custoSeguro;
 			return aux.fazerApostaSeguradaValor(cenario, apostador, valorAposta, previsao, valorSeguro, custoSeguro);
 		} else if (cenario <= 0) {
 			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Cenario invalido");
@@ -242,6 +243,7 @@ public class CenarioController {
 				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Previsao invalida");
 
 			Cenario aux = this.cenarios.get(cenario);
+			this.caixa += custoSeguro;
 			return aux.fazerApostaSeguradaTaxa(cenario, apostador, valorAposta, previsao, taxaSeguro, custoSeguro);
 		} else if (cenario <= 0) {
 			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Cenario invalido");
@@ -261,15 +263,14 @@ public class CenarioController {
 	 * 
 	 * @return : retorna o identificador da aposta após ser alterada.
 	 */
-	public int alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
+	public void alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
 		if (cenarios.containsKey(cenario)) {
 			Cenario aux = cenarios.get(cenario);
 			if (aux.getApostas(apostaAssegurada) != null) {
 				ApostaSeguradaTaxa aposta = (ApostaSeguradaTaxa) aux.getApostas(apostaAssegurada);
-				return aux.alteraApostaValor(aposta, apostaAssegurada, valor);
+				this.caixa -= aux.alteraApostaValor(aposta, apostaAssegurada, valor);
 			}
 		}
-		return 0;
 	}
 
 	/**
@@ -284,15 +285,14 @@ public class CenarioController {
 	 * 
 	 * @return : retorna o identificador da aposta após ser alterada.
 	 */
-	public int alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
+	public void alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
 		if (cenarios.containsKey(cenario)) {
 			Cenario aux = cenarios.get(cenario);
 			if (aux.getApostas(apostaAssegurada) != null) {
 				ApostaSeguradaValor aposta = (ApostaSeguradaValor) aux.getApostas(apostaAssegurada);
-				return aux.alteraApostaTaxa(aposta, apostaAssegurada, taxa);
+				this.caixa -= aux.alteraApostaTaxa(aposta, apostaAssegurada, taxa);
 			}
 		}
-		return 0;
 	}
 
 	/**
@@ -432,17 +432,17 @@ public class CenarioController {
 	public String exibirCenarioOrdenado(int cenario) {
 		if(cenarios.containsKey(cenario)){
 			ArrayList<Cenario> lista = new ArrayList<>(cenarios.values());
-			if (ordem.equalsIgnoreCase("nome")) {
+			if (ordem.equals("nome")) {
 				DescricaoComparator comparator = new DescricaoComparator();			
 				Collections.sort(lista, comparator);
 				return lista.get(cenario - 1).toString();
 			}
-			else if(ordem.equalsIgnoreCase("cadastro")) {
+			else if(ordem.equals("cadastro")) {
 				CadastroComparator comparator = new CadastroComparator();
 				Collections.sort(lista, comparator);
 				return lista.get(cenario - 1).toString();
 			}
-			else if(ordem.equalsIgnoreCase("apostas")) {
+			else if(ordem.equals("apostas")) {
 				ApostaComparator comparator = new ApostaComparator();
 				Collections.sort(lista, comparator);
 				return lista.get(cenario - 1).toString();

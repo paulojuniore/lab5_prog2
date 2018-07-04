@@ -124,7 +124,7 @@ public class Cenario {
 		Aposta aux = new ApostaSeguradaValor(aposta.getNome(), aposta.getValor(), aposta.getPrevisao(), valor, aposta.getCustoSeguro());
 		this.apostas.remove(apostaAssegurada);
 		this.apostas.add(aux);
-		return apostas.lastIndexOf(aux);
+		return valor;
 	}
 	
 	/**
@@ -140,7 +140,7 @@ public class Cenario {
 		Aposta aux = new ApostaSeguradaTaxa(aposta.getNome(), aposta.getValor(), aposta.getPrevisao(), taxa, aposta.getCustoSeguro());
 		this.apostas.remove(apostaAssegurada);
 		this.apostas.add(aux);
-		return apostas.lastIndexOf(aux);
+		return (int) Math.floor(taxa * this.apostas.get(apostaAssegurada).getValor());
 	}
 		
 	/**
@@ -168,6 +168,7 @@ public class Cenario {
 		for(Aposta aposta : apostas) {
 			if(aposta.getPrevisao().equals("VAI ACONTECER") && !previsao) {
 				soma += aposta.getValor();
+				
 			}
 			else if(aposta.getPrevisao().equals("N VAI ACONTECER") && previsao) {
 				soma += aposta.getValor();

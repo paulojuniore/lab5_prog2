@@ -121,8 +121,8 @@ public class Facade {
 	 * 
 	 * @return : retorna um identificador único para a aposta assegurada por valor.
 	 */
-	public int alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
-		return system.alterarSeguroValor(cenario, apostaAssegurada, valor);
+	public void alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
+		 system.alterarSeguroValor(cenario, apostaAssegurada, valor);
 	}
 	
 	/**
@@ -134,8 +134,8 @@ public class Facade {
 	 * 
 	 * @return : retorna um identificador único para a aposta assegurada por valor.
 	 */
-	public int alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
-		return system.alterarSeguroTaxa(cenario, apostaAssegurada, taxa);
+	public void alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
+		 system.alterarSeguroTaxa(cenario, apostaAssegurada, taxa);
 	}
 	
 	/**
