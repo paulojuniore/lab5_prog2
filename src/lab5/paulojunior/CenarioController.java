@@ -9,8 +9,7 @@ import lab5.comparators.CadastroComparator;
 import lab5.comparators.DescricaoComparator;
 
 /**
- * Representa um sistema de apostas. Todo Sistema possui um caixa, taxa e um
- * conjunto de cenários.
+ * Representa um sistema de apostas. Todo Sistema possui um caixa, taxa e um conjunto de cenários.
  * 
  * @author Paulo Mendes da Silva Júnior - 117210922
  *
@@ -37,16 +36,16 @@ public class CenarioController {
 	 */
 	private int idCenario;
 
+	/**
+	 * Critério de ordenação da lista de cenários. (nome, cadastro ou apostas)
+	 */
 	private String ordem;
 
 	/**
-	 * Constrói um sistema a partir da quantidade inicial de dinheiro no sistema e
-	 * sua taxa de juros.
+	 * Constrói um sistema a partir da quantidade inicial de dinheiro no sistema e sua taxa de juros.
 	 * 
-	 * @param caixa
-	 *            : dinheiro do sistema.
-	 * @param taxa
-	 *            : taxa de juros do sistema.
+	 * @param caixa : dinheiro do sistema.
+	 * @param taxa : taxa de juros do sistema.
 	 */
 	public CenarioController(int caixa, double taxa) {
 		if (caixa < 0)
@@ -64,8 +63,7 @@ public class CenarioController {
 	/**
 	 * Cadastra um novo cenário a partir da sua descrição.
 	 * 
-	 * @param descricao
-	 *            : descrição do cenário de apostas.
+	 * @param descricao : descrição do cenário de apostas.
 	 * 
 	 * @return : retorna um int representando o identificador do cenário.
 	 */
@@ -78,10 +76,8 @@ public class CenarioController {
 	/**
 	 * Cadastra um novo cenário que possui um bônus.
 	 * 
-	 * @param descricao
-	 *            : descrição do cenário de apostas.
-	 * @param bonus
-	 *            : bônus a ser inserido no caixa.
+	 * @param descricao : descrição do cenário de apostas.
+	 * @param bonus : bônus a ser inserido no caixa.
 	 * 
 	 * @return : retorna um int representando o identificador do cenário.
 	 */
@@ -95,8 +91,7 @@ public class CenarioController {
 	/**
 	 * Exibe um cenário a partir do seu número de identificação.
 	 * 
-	 * @param cenario
-	 *            : inteiro que representa a identificação de um cenário.
+	 * @param cenario : inteiro que representa a identificação de um cenário.
 	 * 
 	 * @return : retorna a representação String de um cenário.
 	 */
@@ -112,8 +107,7 @@ public class CenarioController {
 	/**
 	 * Exibe todas as apostas efetuadas em um cenário.
 	 * 
-	 * @param idCenario
-	 *            : identificador do cenário.
+	 * @param idCenario : identificador do cenário.
 	 * 
 	 * @return : todas as apostas efetuadas em um cenário.
 	 */
@@ -126,8 +120,7 @@ public class CenarioController {
 	/**
 	 * Exibe todos os cenários cadastrados no sistema.
 	 * 
-	 * @return : retorna uma String com todos a representação de cada um dos
-	 *         cenários cadastrados no sistema.
+	 * @return : retorna uma String com todos a representação de cada um dos cenários cadastrados no sistema.
 	 */
 	public String exibirCenarios() {
 		String aux = "";
@@ -138,18 +131,13 @@ public class CenarioController {
 	}
 
 	/**
-	 * Cadastra uma aposta dentro do sistema em um cenário especificado. Podem
-	 * ocorrer mensagens de erro, como por exemplo: tentar cadastrar uma aposta em
-	 * um cenário inexistente.
+	 * Cadastra uma aposta dentro do sistema em um cenário especificado. Podem ocorrer mensagens de erro, como 
+	 * por exemplo: tentar cadastrar uma aposta em um cenário inexistente.
 	 * 
-	 * @param cenario
-	 *            : número de identificação do cenário.
-	 * @param apostador
-	 *            : nome do apostador.
-	 * @param valor
-	 *            : valor da aposta.
-	 * @param previsao
-	 *            : previsão de o apostador ganhar ou não a aposta.
+	 * @param cenario : número de identificação do cenário.
+	 * @param apostador : nome do apostador.
+	 * @param valor : valor da aposta.
+	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
 	 */
 	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) {
 		if (cenarios.containsKey(cenario)) {
@@ -166,37 +154,25 @@ public class CenarioController {
 	 * Cadastra uma aposta assegurada por valor. Pode lançar alguma exceção caso
 	 * algum dado inválido seja inserido.
 	 * 
-	 * @param cenario
-	 *            : identificador do cenário.
-	 * @param apostador
-	 *            : nome do apostador.
-	 * @param valorAposta
-	 *            : valor da aposta.
-	 * @param previsao
-	 *            : previsão de o apostador ganhar ou não a aposta.
-	 * @param valorSeguro
-	 *            : valor a ser assegurado.
-	 * @param custoSeguro
-	 *            : custo do seguro.
+	 * @param cenario : identificador do cenário.
+	 * @param apostador : nome do apostador.
+	 * @param valorAposta : valor da aposta.
+	 * @param previsao : previsão de o apostador ganhar ou não a aposta.
+	 * @param valorSeguro : valor a ser assegurado.
+	 * @param custoSeguro : custo do seguro.
 	 * 
-	 * @return : retorna o identificador único da aposta, caso todos os dados sejam
-	 *         válidos.
+	 * @return : retorna o identificador único da aposta, caso todos os dados sejam válidos.
 	 */
-	public int cadastrarApostaSeguradaValor(int cenario, String apostador, int valorAposta, String previsao,
-			int valorSeguro, int custoSeguro) {
+	public int cadastrarApostaSeguradaValor(int cenario, String apostador, int valorAposta, String previsao, int valorSeguro, int custoSeguro) {
 		if (cenarios.containsKey(cenario)) {
 			if (apostador == null || apostador.trim().isEmpty())
-				throw new IllegalArgumentException(
-						"Erro no cadastro de aposta assegurada por valor: Apostador nao pode ser vazio ou nulo");
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Apostador nao pode ser vazio ou nulo");
 			if (valorAposta <= 0)
-				throw new IllegalArgumentException(
-						"Erro no cadastro de aposta assegurada por valor: Valor nao pode ser menor ou igual a zero");
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Valor nao pode ser menor ou igual a zero");
 			else if (previsao == null || previsao.trim().isEmpty())
-				throw new IllegalArgumentException(
-						"Erro no cadastro de aposta assegurada por valor: Previsao nao pode ser vazia ou nula");
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Previsao nao pode ser vazia ou nula");
 			if (!previsao.equals("VAI ACONTECER") && !previsao.equals("N VAI ACONTECER"))
-				throw new IllegalArgumentException(
-						"Erro no cadastro de aposta assegurada por valor: Previsao invalida");
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Previsao invalida");
 
 			Cenario aux = this.cenarios.get(cenario);
 			this.caixa += custoSeguro;
@@ -208,37 +184,25 @@ public class CenarioController {
 	}
 
 	/**
-	 * Cadastra uma aposta assegurada por taxa. Pode lançar alguma exceção caso
-	 * algum dado inválido seja inserido.
+	 * Cadastra uma aposta assegurada por taxa. Pode lançar alguma exceção caso algum dado inválido seja inserido.
 	 * 
-	 * @param cenario
-	 *            : identificador do cenário em que será cadastrada a aposta.
-	 * @param apostador
-	 *            : nome do apostador.
-	 * @param valorAposta
-	 *            : valor da aposta.
-	 * @param previsao
-	 *            : previsão de apostador ganhar ou não a aposta.
-	 * @param taxaSeguro
-	 *            : taxa a ser assegurada.
-	 * @param custoSeguro
-	 *            : custo do seguro.
+	 * @param cenario : identificador do cenário em que será cadastrada a aposta.
+	 * @param apostador : nome do apostador.
+	 * @param valorAposta : valor da aposta.
+	 * @param previsao : previsão de apostador ganhar ou não a aposta.
+	 * @param taxaSeguro : taxa a ser assegurada.
+	 * @param custoSeguro : custo do seguro.
 	 * 
-	 * @return : retorna um identificador único de uma aposta assegurada por taxa,
-	 *         caso todos os dados sejam válidos.
+	 * @return : retorna um identificador único de uma aposta assegurada por taxa, caso todos os dados sejam válidos.
 	 */
-	public int cadastrarApostaSeguradaTaxa(int cenario, String apostador, int valorAposta, String previsao,
-			double taxaSeguro, int custoSeguro) {
+	public int cadastrarApostaSeguradaTaxa(int cenario, String apostador, int valorAposta, String previsao, double taxaSeguro, int custoSeguro) {
 		if (cenarios.containsKey(cenario)) {
 			if (apostador == null || apostador.trim().isEmpty())
-				throw new IllegalArgumentException(
-						"Erro no cadastro de aposta assegurada por taxa: Apostador nao pode ser vazio ou nulo");
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Apostador nao pode ser vazio ou nulo");
 			if (valorAposta <= 0)
-				throw new IllegalArgumentException(
-						"Erro no cadastro de aposta assegurada por taxa: Valor nao pode ser menor ou igual a zero");
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Valor nao pode ser menor ou igual a zero");
 			if (previsao == null || previsao.trim().isEmpty())
-				throw new IllegalArgumentException(
-						"Erro no cadastro de aposta assegurada por taxa: Previsao nao pode ser vazia ou nula");
+				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Previsao nao pode ser vazia ou nula");
 			if (!previsao.equals("VAI ACONTECER") && !previsao.equals("N VAI ACONTECER"))
 				throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Previsao invalida");
 
@@ -254,14 +218,9 @@ public class CenarioController {
 	/**
 	 * Altera uma aposta assegurada por taxa, para uma assegurada por valor.
 	 * 
-	 * @param cenario
-	 *            : identificador do cenário em que a aposta será alterada.
-	 * @param apostaAssegurada
-	 *            : identificador da aposta a ser alterada.
-	 * @param valor
-	 *            : valor a ser assegurado após a alteração.
-	 * 
-	 * @return : retorna o identificador da aposta após ser alterada.
+	 * @param cenario : identificador do cenário em que a aposta será alterada.
+	 * @param apostaAssegurada : identificador da aposta a ser alterada.
+	 * @param valor : valor a ser assegurado após a alteração.
 	 */
 	public void alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
 		if (cenarios.containsKey(cenario)) {
@@ -276,14 +235,9 @@ public class CenarioController {
 	/**
 	 * Altera uma aposta assegurada por valor, para uma assegurada por taxa.
 	 * 
-	 * @param cenario
-	 *            : identificador do cenário em que a aposta será alterada.
-	 * @param apostaAssegurada
-	 *            : identificador da aposta a ser alterada.
-	 * @param taxa
-	 *            : taxa a ser assegurada após a alteração.
-	 * 
-	 * @return : retorna o identificador da aposta após ser alterada.
+	 * @param cenario : identificador do cenário em que a aposta será alterada.
+	 * @param apostaAssegurada : identificador da aposta a ser alterada.
+	 * @param taxa : taxa a ser assegurada após a alteração.
 	 */
 	public void alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
 		if (cenarios.containsKey(cenario)) {
@@ -305,12 +259,10 @@ public class CenarioController {
 	}
 
 	/**
-	 * Retorna o total de apostas efetuadas em um cenário, a partir do número do
-	 * cenário. , como por exemplo: tentar acessar o total de apostas de um cenário
-	 * inexistente.
+	 * Retorna o total de apostas efetuadas em um cenário, a partir do número do cenário. , como por exemplo: 
+	 * tentar acessar o total de apostas de um cenário inexistente.
 	 * 
-	 * @param cenario
-	 *            : número do cenário a saber a quantidade de apostas.
+	 * @param cenario : número do cenário a saber a quantidade de apostas.
 	 * 
 	 * @return : retorna o número de apostas efetuadas em um cenário.
 	 */
@@ -324,12 +276,10 @@ public class CenarioController {
 	}
 
 	/**
-	 * Retorna o valor total arrecadado em apostas pelo sistema. Podem ocorrer
-	 * mensagens de erro, como por exemplo: tentar consultar o valor total em
-	 * apostas de um cenário inexistente ou não cadastrado.
+	 * Retorna o valor total arrecadado em apostas pelo sistema. Podem ocorrer mensagens de erro, como por 
+	 * exemplo: tentar consultar o valor total em apostas de um cenário inexistente ou não cadastrado.
 	 * 
-	 * @param cenario
-	 *            : identificador do cenário.
+	 * @param cenario : identificador do cenário.
 	 * 
 	 * @return : retorna o valor total arrecadado em apostas pelo sistema.
 	 */
@@ -343,14 +293,11 @@ public class CenarioController {
 	}
 
 	/**
-	 * Encerra um cenário e atribui o dinheiro dos apostadores que perderam ao
-	 * caixa. Podem ocorrer mensagens de erro, como por exemplo: tentar encerrar um
-	 * cenário que já está fechado ou um não cadastrado.
+	 * Encerra um cenário e atribui o dinheiro dos apostadores que perderam ao caixa. Podem ocorrer mensagens 
+	 * de erro, como por exemplo: tentar encerrar um cenário que já está fechado ou um não cadastrado.
 	 * 
-	 * @param cenario
-	 *            : identificador do cenário que será encerrado.
-	 * @param ocorreu
-	 *            : boolean que representa se ocorreu ou não a aposta. (true/false).
+	 * @param cenario : identificador do cenário que será encerrado.
+	 * @param ocorreu : boolean que representa se ocorreu ou não a aposta. (true/false).
 	 */
 	public void fecharAposta(int cenario, boolean ocorreu) {
 		if (cenarios.containsKey(cenario)) {
@@ -369,12 +316,11 @@ public class CenarioController {
 	}
 
 	/**
-	 * Retorna a quantidade de dinheiro que será destinada ao caixa. Podem ocorrer
-	 * mensagens de erro, como por exemplo: tentar retornar a quantidade de dinheiro
-	 * do caixa de um cenário que ainda está aberto ou um cenário inexistente.
+	 * Retorna a quantidade de dinheiro que será destinada ao caixa. Podem ocorrer mensagens de erro, como por 
+	 * exemplo: tentar retornar a quantidade de dinheiro do caixa de um cenário que ainda está aberto ou um 
+	 * cenário inexistente.
 	 * 
-	 * @param cenario
-	 *            : identificador de um cenário.
+	 * @param cenario : identificador de um cenário.
 	 * 
 	 * @return : retorna a quantidade de dinheiro que será destinada ao caixa.
 	 */
@@ -393,15 +339,12 @@ public class CenarioController {
 	}
 
 	/**
-	 * Retorna o rateio total de de um cenário. Que é o valor que será distribuido
-	 * entre as apostas vencedoras. Podem ocorrer mensagens de erro, como por
-	 * exemplo: pedir o rateio de um cenário inexistente ou ainda aberto.
+	 * Retorna o rateio total de de um cenário. Que é o valor que será distribuido entre as apostas vencedoras. 
+	 * Podem ocorrer mensagens de erro, como por exemplo: pedir o rateio de um cenário inexistente ou ainda aberto.
 	 * 
-	 * @param cenario
-	 *            : identificador de um cenário.
+	 * @param cenario : identificador de um cenário.
 	 * 
-	 * @return : retorna o rateio total de um cenário, ou uma mensagem de erro, se
-	 *         for o caso.
+	 * @return : retorna o rateio total de um cenário, ou uma mensagem de erro, se for o caso.
 	 */
 	public int getTotalRateioCenario(int cenario) {
 		if (cenarios.containsKey(cenario)) {
@@ -419,6 +362,11 @@ public class CenarioController {
 		}
 	}
 
+	/**
+	 * Altera o critério de ordenação da lista de cenários. Podendo ser por (nome, cadastro ou apostas)
+	 * 
+	 * @param ordem : critério de ordenação. (nome, cadastro ou apostas)
+	 */
 	public void alterarOrdem(String ordem) {
 		if(ordem.trim().isEmpty() || ordem == null) {
 			throw new IllegalArgumentException("Erro ao alterar ordem: Ordem nao pode ser vazia ou nula");
@@ -429,6 +377,13 @@ public class CenarioController {
 		this.ordem = ordem;
 	}
 
+	/**
+	 * Exibe o Elemento na posição especificada após a lista ser ordenada seguindo o critério de ordenação definido.
+	 * 
+	 * @param cenario : posição do elemento a ser exibido após a ordenação da lista.
+	 * 
+	 * @return : retorna a representação String do cenário que está na posição especificada após a lista ser ordenada.
+	 */
 	public String exibirCenarioOrdenado(int cenario) {
 		if(cenarios.containsKey(cenario)){
 			ArrayList<Cenario> lista = new ArrayList<>(cenarios.values());

@@ -118,8 +118,6 @@ public class Facade {
 	 * @param cenario : identificador do cenário em que será cadastrada a aposta.
 	 * @param apostaAssegurada : identificador da aposta assegurada por taxa a ser alterada.
 	 * @param valor : valor do seguro.
-	 * 
-	 * @return : retorna um identificador único para a aposta assegurada por valor.
 	 */
 	public void alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
 		 system.alterarSeguroValor(cenario, apostaAssegurada, valor);
@@ -131,8 +129,6 @@ public class Facade {
 	 * @param cenario : identificador do cenário em que será cadastrada a aposta.
 	 * @param apostaAssegurada : identificador da aposta assegurada por taxa a ser alterada.
 	 * @param taxa : taxa do seguro.
-	 * 
-	 * @return : retorna um identificador único para a aposta assegurada por valor.
 	 */
 	public void alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
 		 system.alterarSeguroTaxa(cenario, apostaAssegurada, taxa);
@@ -212,10 +208,22 @@ public class Facade {
 		return system.getCaixa();
 	}
 	
+	/**
+	 * Altera o critério de ordenação dos cenários.
+	 * 
+	 * @param ordem : critério de ordenação dos cenários. (nome, cadastro ou apostas)
+	 */
 	public void alterarOrdem(String ordem) {
 		system.alterarOrdem(ordem);
 	}
 	
+	/**
+	 * Exibe uma determinada posição do cenário com base no critério de ordenação.
+	 * 
+	 * @param cenario : posição desejada do conjunto de cenários ordenados pelo critério determinado.
+	 * 
+	 * @return : retorna o a posição determinada do cenário com base no critério de ordenação.
+	 */
 	public String exibirCenarioOrdenado(int cenario) {
 		return system.exibirCenarioOrdenado(cenario);
 	}
