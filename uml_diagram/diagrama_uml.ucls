@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="lab5.paulojunior.ApostaSeguradaTaxa" project="Lab5PauloJunior" 
-    file="/Lab5PauloJunior/src/lab5/paulojunior/ApostaSeguradaTaxa.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="lab5.paulojunior.ApostaSeguradaTaxa" project="lab5_prog2" 
+    file="/lab5_prog2/src/lab5/paulojunior/ApostaSeguradaTaxa.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="171" width="261" x="89" y="1782"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="lab5.paulojunior.ApostaSeguradaValor" project="Lab5PauloJunior" 
-    file="/Lab5PauloJunior/src/lab5/paulojunior/ApostaSeguradaValor.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="lab5.paulojunior.ApostaSeguradaValor" project="lab5_prog2" 
+    file="/lab5_prog2/src/lab5/paulojunior/ApostaSeguradaValor.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="171" width="242" x="390" y="1782"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="lab5.paulojunior.Facade" project="Lab5PauloJunior" 
-    file="/Lab5PauloJunior/src/lab5/paulojunior/Facade.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="lab5.paulojunior.Facade" project="lab5_prog2" 
+    file="/lab5_prog2/src/lab5/paulojunior/Facade.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="441" width="324" x="89" y="2"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="lab5.comparators.ApostaComparator" project="Lab5PauloJunior" 
-    file="/Lab5PauloJunior/comparators/lab5/comparators/ApostaComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="lab5.comparators.ApostaComparator" project="lab5_prog2" 
+    file="/lab5_prog2/comparators/lab5/comparators/ApostaComparator.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="99" width="167" x="453" y="2"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="lab5.comparators.CadastroComparator" project="Lab5PauloJunior" 
-    file="/Lab5PauloJunior/comparators/lab5/comparators/CadastroComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="lab5.comparators.CadastroComparator" project="lab5_prog2" 
+    file="/lab5_prog2/comparators/lab5/comparators/CadastroComparator.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="99" width="167" x="660" y="2"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="lab5.paulojunior.Aposta" project="Lab5PauloJunior" 
-    file="/Lab5PauloJunior/src/lab5/paulojunior/Aposta.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="lab5.paulojunior.Aposta" project="lab5_prog2" 
+    file="/lab5_prog2/src/lab5/paulojunior/Aposta.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="207" width="142" x="89" y="1535"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,8 +55,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="lab5.comparators.DescricaoComparator" project="Lab5PauloJunior" 
-    file="/Lab5PauloJunior/comparators/lab5/comparators/DescricaoComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="lab5.comparators.DescricaoComparator" project="lab5_prog2" 
+    file="/lab5_prog2/comparators/lab5/comparators/DescricaoComparator.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="99" width="167" x="867" y="2"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -64,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="lab5.paulojunior.Cenario" project="Lab5PauloJunior" 
-    file="/Lab5PauloJunior/src/lab5/paulojunior/Cenario.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="lab5.paulojunior.Cenario" project="lab5_prog2" 
+    file="/lab5_prog2/src/lab5/paulojunior/Cenario.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="495" width="315" x="89" y="1000"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="lab5.paulojunior.CenarioBonus" project="Lab5PauloJunior" 
-    file="/Lab5PauloJunior/src/lab5/paulojunior/CenarioBonus.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="lab5.paulojunior.CenarioBonus" project="lab5_prog2" 
+    file="/lab5_prog2/src/lab5/paulojunior/CenarioBonus.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="153" width="184" x="271" y="1535"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -82,8 +82,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="lab5.paulojunior.CenarioController" project="Lab5PauloJunior" 
-    file="/Lab5PauloJunior/src/lab5/paulojunior/CenarioController.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="10" language="java" name="lab5.paulojunior.CenarioController" project="lab5_prog2" 
+    file="/lab5_prog2/src/lab5/paulojunior/CenarioController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="477" width="336" x="89" y="483"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -92,39 +92,51 @@
     </display>  
   </class>  
   <association id="11">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="12" name="apostas"/>      
-      <multiplicity id="13" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="14">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <generalization id="15">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <association id="16">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="17" name="system"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="19">    
     <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="20" name="cenarios"/>      
-      <multiplicity id="21" minimum="0" maximum="2147483647"/>    
+      <attribute id="12" name="cenarios">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="22">    
+  <association id="14">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="15" name="system">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="16" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="17">    
     <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="18">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="19" name="apostas">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="20" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="21">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="22">    
+    <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
